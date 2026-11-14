@@ -207,6 +207,44 @@
   .animate-float {
     animation: subtle-float 3.5s ease-in-out infinite;
   }
+
+  /* Organic Character Idle Breathing (Natural Chest & Posture Cycle) */
+  @keyframes character-idle-breathe {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-2px) scale(1.004);
+    }
+  }
+
+  /* Organic Character Speaking Cadence (Natural Speech Micro-Dynamics) */
+  @keyframes character-speaking-cadence {
+    0%, 100% {
+      transform: translateY(0px) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-2.5px) scale(1.006) rotate(0.25deg);
+    }
+    50% {
+      transform: translateY(-1px) scale(1.003) rotate(-0.15deg);
+    }
+    75% {
+      transform: translateY(-3px) scale(1.007) rotate(0.15deg);
+    }
+  }
+
+  .character-idle {
+    animation: character-idle-breathe 4.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    transform-origin: bottom center;
+    will-change: transform;
+  }
+
+  .character-speaking {
+    animation: character-speaking-cadence 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: bottom center;
+    will-change: transform;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

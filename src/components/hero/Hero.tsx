@@ -31,7 +31,16 @@ export function Hero() {
               "Hi, I'm Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
             );
             utter.rate = 0.9;
-            utter.pitch = 1.05;
+            utter.pitch = 1.0;
+            const voices = window.speechSynthesis.getVoices();
+            const indianVoice = voices.find(
+              (v) =>
+                v.lang === "en-IN" ||
+                v.lang.startsWith("en-IN") ||
+                v.name.toLowerCase().includes("india") ||
+                v.name.toLowerCase().includes("hindi")
+            );
+            if (indianVoice) utter.voice = indianVoice;
             utter.onend = () => {
               setIsVoicePlaying(false);
               setIsMuted(true);
@@ -112,14 +121,20 @@ export function Hero() {
               maxHeight: "min(78svh, 820px)",
             }}
           >
-            <Image
-              src="/portrait-bust.png"
-              alt="Gurpreet Kaur — Lead UI/UX Designer"
-              width={480}
-              height={600}
-              priority
-              className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
-            />
+            <div
+              className={`w-full h-full flex items-center justify-center transition-transform duration-700 ${
+                isVoicePlaying ? "character-speaking" : "character-idle"
+              }`}
+            >
+              <Image
+                src="/portrait-bust.png"
+                alt="Gurpreet Kaur — Lead UI/UX Designer"
+                width={480}
+                height={600}
+                priority
+                className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
+              />
+            </div>
 
             {/* Voice Audio Track (with cache-bust version query) */}
             <audio
@@ -130,8 +145,8 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.m4a?v=3" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=3" type="audio/wav" />
+              <source src="/hero/intro-voice.m4a?v=4" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=4" type="audio/wav" />
             </audio>
           </div>
 
