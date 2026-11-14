@@ -42,7 +42,7 @@ export function Hero() {
           if (typeof window !== "undefined" && "speechSynthesis" in window) {
             window.speechSynthesis.cancel();
             const utter = new SpeechSynthesisUtterance(
-              "Hi, I'm Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
+              "Hi! I'm Gurpreet, Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools, like ChatGPT, Claude, Gemini, and Antigravity, to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
             );
             utter.rate = 0.9;
             utter.pitch = 1.0;
@@ -173,8 +173,8 @@ export function Hero() {
                     "radial-gradient(ellipse 90% 86% at 50% 48%, black 65%, transparent 96%)",
                 }}
               >
-                <source src="/hero/hero.webm" type="video/webm" />
-                <source src="/hero/hero.mp4" type="video/mp4" />
+                <source src="/hero/hero.webm?v=6" type="video/webm" />
+                <source src="/hero/hero.mp4?v=6" type="video/mp4" />
               </video>
             </div>
 
@@ -187,9 +187,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=5" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=5" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=5" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=6" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=6" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=6" type="audio/wav" />
             </audio>
           </div>
 
