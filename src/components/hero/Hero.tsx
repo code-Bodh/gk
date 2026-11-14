@@ -7,10 +7,24 @@ import { useScroll } from "@/lib/scroll";
 
 export function Hero() {
   const { scrollTo } = useScroll();
+  const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+
+  // Synchronize talking character video animation with audio playback
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isVoicePlaying) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVoicePlaying]);
 
   // Play calm, sweet, and youthful audio greeting
   const playGreeting = () => {
@@ -121,9 +135,10 @@ export function Hero() {
               maxHeight: "min(78svh, 820px)",
             }}
           >
+            {/* Idle Character State (Natural gentle breathing, relaxed posture, 100% transparent) */}
             <div
-              className={`w-full h-full flex items-center justify-center transition-transform duration-700 ${
-                isVoicePlaying ? "character-speaking" : "character-idle"
+              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+                isVoicePlaying ? "opacity-0 pointer-events-none" : "opacity-100 character-idle"
               }`}
             >
               <Image
@@ -136,6 +151,33 @@ export function Hero() {
               />
             </div>
 
+            {/* Speaking Character State (Pre-rendered video loop with gestures, lip-sync, head tilts) */}
+            <div
+              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+                isVoicePlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <video
+                ref={videoRef}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/portrait-bust.png"
+                className="w-full h-full object-contain mix-blend-multiply"
+                style={{
+                  filter: "contrast(1.02) brightness(1.01)",
+                  maskImage:
+                    "radial-gradient(ellipse 90% 86% at 50% 48%, black 65%, transparent 96%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 90% 86% at 50% 48%, black 65%, transparent 96%)",
+                }}
+              >
+                <source src="/hero/hero.webm" type="video/webm" />
+                <source src="/hero/hero.mp4" type="video/mp4" />
+              </video>
+            </div>
+
             {/* Voice Audio Track (with cache-bust version query) */}
             <audio
               ref={audioRef}
@@ -145,8 +187,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.m4a?v=4" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=4" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=5" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=5" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=5" type="audio/wav" />
             </audio>
           </div>
 
