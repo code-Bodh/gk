@@ -204,7 +204,7 @@ export function Hero() {
                 )}
               </button>
               {/* Tooltip */}
-              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-xl bg-[#0d0d0d] text-[#f4f2ee] text-[11px] font-mono tracking-tight whitespace-nowrap opacity-0 group-hover/sound:opacity-100 transition-opacity pointer-events-none shadow-md">
+              <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-xl bg-[#0d0d0d] text-[#f4f2ee] text-[11px] font-mono whitespace-nowrap opacity-0 group-hover/sound:opacity-100 transition-opacity pointer-events-none shadow-md">
                 {isVoicePlaying
                   ? "Playing intro (Lead UI/UX & AI Tools)..."
                   : 'Voice: "Hi, I am Gurpreet! Lead UI/UX..."'}
@@ -220,7 +220,7 @@ export function Hero() {
             <span>{PROFILE.location}</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0d0d0d] leading-none mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#0d0d0d] leading-none mb-4">
             {PROFILE.role}.
           </h1>
           <p className="text-sm sm:text-base text-[#77756f] max-w-lg mx-auto mb-8 font-normal">

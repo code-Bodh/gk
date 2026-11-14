@@ -84,7 +84,7 @@
   .section-tag {
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: normal;
     text-transform: uppercase;
     color: var(--mute);
     margin-bottom: clamp(14px, 2.5vh, 24px);
@@ -97,7 +97,7 @@
     font-family: var(--font-sans);
     font-size: clamp(38px, 6vw, 76px);
     font-weight: 700;
-    letter-spacing: -0.045em;
+    letter-spacing: normal;
     line-height: 1;
     color: var(--ink);
     margin-bottom: clamp(36px, 6vh, 64px);
@@ -108,7 +108,7 @@
     font-style: italic;
     font-weight: 400;
     color: var(--mute);
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
   }
 
   /* Reveal on scroll */
@@ -192,6 +192,20 @@
     transform: translateY(-1px);
     border-color: var(--ink);
     background: rgba(13, 13, 13, 0.03);
+  }
+
+  /* Gentle Floating Animation */
+  @keyframes subtle-float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .animate-float {
+    animation: subtle-float 3.5s ease-in-out infinite;
   }
 }
 

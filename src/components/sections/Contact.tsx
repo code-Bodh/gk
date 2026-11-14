@@ -35,7 +35,7 @@ export function Contact() {
 
         {/* Animated Letter Hop Heading */}
         <div className="mb-12">
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[#0d0d0d] leading-none select-none">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#0d0d0d] leading-none select-none">
             <div className="flex flex-wrap">
               {line1.split("").map((char, i) => (
                 <span
@@ -64,7 +64,7 @@ export function Contact() {
         {/* Contact Links & Spinning Badge Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-end mb-20">
           <div>
-            <span className="font-mono text-xs uppercase tracking-wider text-[#77756f] block mb-3">
+            <span className="font-mono text-xs uppercase text-[#77756f] block mb-3">
               Direct Inquiries
             </span>
 
@@ -72,7 +72,7 @@ export function Contact() {
             <div className="flex flex-wrap items-baseline gap-4 mb-6">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#0d0d0d] underline decoration-2 underline-offset-8 hover:text-[#77756f] transition-colors"
+                className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#0d0d0d] underline decoration-2 underline-offset-8 hover:text-[#77756f] transition-colors"
               >
                 {PROFILE.email}
               </a>

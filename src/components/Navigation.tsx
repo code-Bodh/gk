@@ -114,7 +114,7 @@ export function Navigation() {
               />
             </button>
             <span
-              className={`text-sm font-semibold tracking-tight transition-all duration-500 hidden sm:inline-block ${
+              className={`text-sm font-semibold transition-all duration-500 hidden sm:inline-block ${
                 scrolled ? "opacity-0 -translate-x-2 pointer-events-none" : "opacity-100 translate-x-0"
               }`}
             >
@@ -155,7 +155,7 @@ export function Navigation() {
           <div className="md:hidden pointer-events-auto">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#ffffff]/90 backdrop-blur-md border border-[#0d0d0d]/15 shadow-sm text-[#0d0d0d] transition-all hover:bg-[#0d0d0d] hover:text-[#f4f2ee]"
+              className="px-4 py-2 rounded-full text-xs font-semibold uppercase bg-[#ffffff]/90 backdrop-blur-md border border-[#0d0d0d]/15 shadow-sm text-[#0d0d0d] transition-all hover:bg-[#0d0d0d] hover:text-[#f4f2ee]"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -179,7 +179,7 @@ export function Navigation() {
         }}
       >
         <div className="flex items-center justify-between">
-          <span className="font-mono text-xs text-[#77756f] tracking-wider uppercase">
+          <span className="font-mono text-xs text-[#77756f] uppercase">
             Navigation
           </span>
           <button
@@ -202,7 +202,7 @@ export function Navigation() {
               <span className="font-mono text-xs text-[#a9a6a0] group-hover:text-[#0d0d0d]">
                 {item.num}
               </span>
-              <span className="text-4xl font-bold tracking-tight text-[#0d0d0d] group-hover:translate-x-2 transition-transform duration-300">
+              <span className="text-4xl font-bold text-[#0d0d0d] group-hover:translate-x-2 transition-transform duration-300">
                 {item.label}
               </span>
             </button>

@@ -83,10 +83,10 @@ export function About() {
           {/* Left Column: Summary & Links */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between">
             <div>
-              <span className="font-mono text-xs uppercase tracking-wider text-[#77756f] block mb-3">
+              <span className="font-mono text-xs uppercase text-[#77756f] block mb-3">
                 Overview
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0d0d0d] mb-5">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#0d0d0d] mb-5">
                 Hi, I&apos;m {PROFILE.name.split(" ")[0]}.
               </h3>
               <p className="text-sm sm:text-base leading-relaxed text-[#3a3a3a] mb-6">
@@ -324,7 +324,7 @@ export function About() {
           {/* Right Column: Quick Facts & Quote */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between">
             <div>
-              <span className="font-mono text-xs uppercase tracking-wider text-[#77756f] block mb-4">
+              <span className="font-mono text-xs uppercase text-[#77756f] block mb-4">
                 Quick Facts
               </span>
 

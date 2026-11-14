@@ -406,20 +406,19 @@ export const PROJECTS: Project[] = [
     id: "ooh-audit",
     index: "01",
     title: "OOH Audit Platform",
-    kicker: "Mobile App + Analytics Dashboard",
+    kicker: "Enterprise Web Platform & Analytics Dashboard",
     description:
-      "Designed a real-time campaign tracking platform to improve data visibility and field-team workflows across national outdoor advertising networks.",
+      "Designed an enterprise web platform and analytics dashboard for real-time campaign tracking, proof verification, and media intelligence across national outdoor advertising networks.",
     features: [
-      "Tamper-proof field proof with Moshpit mobile app",
-      "Executive Brand Manager live monitoring dashboard",
-      "Real-time geo-tagged status audits & proof logs",
-      "Measured task completion acceleration by ~30%",
+      "Web-based executive monitoring dashboards",
+      "Real-time geo-tagged audit proof logs & reporting",
+      "Enterprise media asset tracking & operational visibility",
+      "Accelerated audit review cycles by ~30%",
     ],
-    tech: ["Figma", "Design Systems", "Mobile-First", "Data Visualization"],
+    tech: ["Figma", "Web Design", "Design Systems", "Data Visualization"],
     liveUrl: "https://oohaudit.com/",
     caseStudyUrl:
       "https://www.behance.net/gallery/251451983/OOH-Audit-Tamper-Proof-Field-Verification-Ecosystem",
-    appStoreUrl: "https://apps.apple.com/in/app/moshpit-app/id1438508518",
     uiType: "dashboard",
   },
   {
@@ -435,7 +434,7 @@ export const PROJECTS: Project[] = [
       "Curated visual aesthetics with high-res product galleries",
       "Native cross-platform experience across iOS and Android",
     ],
-    tech: ["Figma", "UI/UX Design", "User Flows", "Photoshop"],
+    tech: ["Figma", "UI/UX Design", "eCommerce", "User Flows"],
     liveUrl: "https://shop.eikaebana.com/",
     appStoreUrl: "https://apps.apple.com/in/app/eikaebana/id1640209271",
     playStoreUrl:
@@ -458,13 +457,15 @@ export const PROJECTS: Project[] = [
     tech: ["Figma", "Dashboard Design", "User Research", "Wireframing"],
     liveUrl: "https://www.machinedalal.com/",
     appStoreUrl: "https://apps.apple.com/gm/app/machine-dalal/id1071517063",
+    playStoreUrl:
+      "https://play.google.com/store/apps/details?id=machinedalal.hashbrown.com.machinedalal&hl=en_IN",
     uiType: "marketplace",
   },
   {
     id: "brand-manager",
     index: "04",
     title: "Brand Manager App",
-    kicker: "Executive Monitoring Mobile App",
+    kicker: "Executive Monitoring & Audit Verification App",
     description:
       "Designed the Brand Manager mobile application empowering brand leaders and executives with live campaign monitoring, real-time audit approvals, and proof-of-performance analytics.",
     features: [
@@ -474,32 +475,16 @@ export const PROJECTS: Project[] = [
       "Seamless cross-platform deployment on iOS and Android",
     ],
     tech: ["iOS", "Android", "UI/UX Design", "Data Visualization"],
-    liveUrl: "https://oohaudit.com/",
     caseStudyUrl:
       "https://www.behance.net/gallery/251451983/OOH-Audit-Tamper-Proof-Field-Verification-Ecosystem",
-    appStoreUrl: "https://apps.apple.com/in/app/moshpit-app/id1438508518",
+    appStoreUrl: "https://apps.apple.com/gm/app/brand-manager/id1670056821",
+    playStoreUrl:
+      "https://play.google.com/store/apps/details?id=app.brand.platform.hashbrown&hl=en_IN",
     uiType: "dashboard",
   },
   {
-    id: "smarttoonkids",
-    index: "05",
-    title: "SmartToonKids",
-    kicker: "AI-Generated Educational Media",
-    description:
-      "Conceptualized, scripted, and produced AI-generated educational video content for SmartToonKids end-to-end—driving 45K+ views and 100K+ likes across the channel.",
-    features: [
-      "End-to-end storyboard scripting & visual direction",
-      "Generative visual asset generation via Gemini & Firefly",
-      "High-retention shortform pacing for young learners",
-      "Surpassed 45K+ organic views and 100K+ channel likes",
-    ],
-    tech: ["ChatGPT", "Gemini", "Adobe Firefly", "Photoshop", "Canva"],
-    liveUrl: "https://www.instagram.com/smarttoonkids/",
-    uiType: "video",
-  },
-  {
     id: "moshpit-app",
-    index: "06",
+    index: "05",
     title: "Moshpit App",
     kicker: "Tamper-Proof Field Verification App",
     description:
@@ -510,12 +495,30 @@ export const PROJECTS: Project[] = [
       "Automated sync with Brand Manager executive dashboards",
       "Seamless cross-platform deployment on iOS and Android",
     ],
-    tech: ["iOS", "Android", "Mobile-First", "UI/UX Design"],
-    liveUrl: "https://oohaudit.com/",
+    tech: ["iOS", "Android", "Mobile App", "UI/UX Design"],
     caseStudyUrl:
       "https://www.behance.net/gallery/251451983/OOH-Audit-Tamper-Proof-Field-Verification-Ecosystem",
-    appStoreUrl: "https://apps.apple.com/in/app/moshpit-app/id1438508518",
+    appStoreUrl: "https://apps.apple.com/us/app/moshpit-app/id1438508518",
+    playStoreUrl:
+      "https://play.google.com/store/search?q=moshpit&c=apps&hl=en_IN",
     uiType: "mobile",
+  },
+  {
+    id: "smarttoonkids",
+    index: "06",
+    title: "SmartToonKids",
+    kicker: "AI & 2D Animated Video Production",
+    description:
+      "Original 2D animated educational series conceptualized, scripted, voiced, and animated from scratch—driving 45K+ organic views and 100K+ reach across social channels.",
+    features: [
+      "Original 2D animation, storyboarding & character design",
+      "Scriptwriting, narrative pacing & child-friendly storytelling",
+      "Voiceover direction, audio synchronization & sound effects",
+      "Surpassed 45K+ organic views & 100K+ impressions",
+    ],
+    tech: ["2D Animation", "Storyboarding", "Character Design", "Photoshop", "AI Tools"],
+    liveUrl: "https://www.instagram.com/smarttoonkids/",
+    uiType: "video",
   },
 ];
 
@@ -627,40 +630,39 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     index: "04 / 06",
-    numberDisplay: "~20%",
-    targetNumber: 20,
-    prefix: "~15–",
-    suffix: "%",
-    label: "Conversion Lift",
-    caption: "eCommerce Flow UX",
-    detail:
-      "Optimized browsing-to-payment user journeys delivering 15–20% higher shopping cart conversion.",
-    platform: "Eikaebana",
-    platformKey: "eikaebana",
-  },
-  {
-    index: "05 / 06",
     numberDisplay: "45K+",
     targetNumber: 45,
     suffix: "K+",
-    label: "Organic Reach",
-    caption: "SmartToonKids AI Media",
+    label: "Video Views",
+    caption: "SmartToonKids 2D Animation",
     detail:
-      "Conceptualized and produced AI-generated educational video content driving broad reach.",
-    platform: "Instagram",
-    platformKey: "instagram",
+      "Original 2D animation, storyboarding, character design, and sound direction driving 45K+ organic views and 100K+ reach.",
+    platform: "SmartToonKids",
+    platformKey: "smarttoonkids",
+  },
+  {
+    index: "05 / 06",
+    numberDisplay: "7+",
+    targetNumber: 7,
+    suffix: "+",
+    label: "AI Tools Integrated",
+    caption: "Next-Gen Design Workflow",
+    detail:
+      "Daily integration of ChatGPT, Claude, Gemini, Antigravity, Meta AI, Stitch, and Nano Banana.",
+    platform: "AI Suite",
+    platformKey: "ai",
   },
   {
     index: "06 / 06",
-    numberDisplay: "100K+",
+    numberDisplay: "100%",
     targetNumber: 100,
-    suffix: "K+",
-    label: "Engagement",
-    caption: "Audience Interaction",
+    suffix: "%",
+    label: "Developer Alignment",
+    caption: "Design System Specs",
     detail:
-      "Cumulative likes and shares achieved through high-retention visual storytelling and character design.",
-    platform: "SmartToonKids",
-    platformKey: "smarttoonkids",
+      "Production-ready design tokens, responsive Figma variants, and seamless developer handoff.",
+    platform: "Figma",
+    platformKey: "figma",
   },
 ];
 

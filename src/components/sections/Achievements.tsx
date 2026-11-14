@@ -60,20 +60,20 @@ export function Achievements() {
           {/* Card 1 (Spans 2 cols on desktop for visual rhythm) */}
           <div className="lg:col-span-2 card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+              <span className="font-mono text-[11px] uppercase text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
                 UI/UX Leadership · Hashbrown Systems
               </span>
               <span className="font-mono text-xs text-[#a9a6a0]">01 / 06</span>
             </div>
 
             <div className="my-auto">
-              <div className="text-5xl sm:text-7xl font-bold tracking-tight text-[#0d0d0d] mb-4 font-sans flex items-baseline">
+              <div className="text-5xl sm:text-7xl font-bold text-[#0d0d0d] mb-4 font-sans flex items-baseline">
                 <Counter target={9} active={hasAnimated} suffix="+" />
                 <span className="text-2xl sm:text-3xl font-serif italic text-[#77756f] ml-3 font-normal">
                   Years of Craft
                 </span>
               </div>
-              <h3 className="text-xl font-bold tracking-tight text-[#0d0d0d] mb-2">
+              <h3 className="text-xl font-bold text-[#0d0d0d] mb-2">
                 From Junior Designer to Product Design Lead
               </h3>
               <p className="text-sm text-[#52504b] leading-relaxed max-w-2xl">
@@ -94,17 +94,17 @@ export function Achievements() {
           {/* Card 2: 10+ Live Products */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+              <span className="font-mono text-[11px] uppercase text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
                 Scale &amp; Breadth
               </span>
               <span className="font-mono text-xs text-[#a9a6a0]">02 / 06</span>
             </div>
 
             <div className="my-auto">
-              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+              <div className="text-5xl sm:text-6xl font-bold text-[#0d0d0d] mb-3 font-sans">
                 <Counter target={10} active={hasAnimated} suffix="+" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+              <h3 className="text-lg font-bold text-[#0d0d0d] mb-2">
                 Live Products Shipped
               </h3>
               <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
@@ -121,17 +121,17 @@ export function Achievements() {
           {/* Card 3: ~30% Task Completion */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
+              <span className="font-mono text-[11px] uppercase text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
                 Efficiency
               </span>
               <span className="font-mono text-xs text-[#a9a6a0]">03 / 06</span>
             </div>
 
             <div className="my-auto">
-              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+              <div className="text-5xl sm:text-6xl font-bold text-[#0d0d0d] mb-3 font-sans">
                 <Counter target={30} active={hasAnimated} prefix="~" suffix="%" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+              <h3 className="text-lg font-bold text-[#0d0d0d] mb-2">
                 Faster Task Execution
               </h3>
               <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
@@ -144,36 +144,62 @@ export function Achievements() {
             </div>
           </div>
 
-          {/* Card 4: 15–20% Conversion Lift */}
+          {/* Card 4: SmartToonKids 2D Animated Channel & Video Production */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-8">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5">
-                Conversion
+              <span className="font-mono text-[11px] uppercase text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                <span>Animation &amp; Video Craft</span>
               </span>
               <span className="font-mono text-xs text-[#a9a6a0]">04 / 06</span>
             </div>
 
             <div className="my-auto">
-              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
-                <Counter target={20} active={hasAnimated} prefix="15–" suffix="%" />
+              <div className="text-5xl sm:text-6xl font-bold text-[#0d0d0d] mb-3 font-sans">
+                <Counter target={45} active={hasAnimated} suffix="K+" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
-                eCommerce Checkout Lift
+              <h3 className="text-lg font-bold text-[#0d0d0d] mb-2">
+                SmartToonKids Animated Series
               </h3>
-              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed">
-                Optimized browsing, product discovery, and friction-free payment journeys for luxury home décor retail.
+              <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed mb-4">
+                End-to-end 2D animation, storyboarding, original character design, voiceover sync, and sound direction for educational video content.
               </p>
+
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  "2D Animation",
+                  "Storyboarding",
+                  "Character Design",
+                  "Motion Direction",
+                  "Audio Sync",
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-0.5 rounded-md bg-[#f4f2ee] border border-[#0d0d0d]/5 font-mono text-[10px] text-[#3a3a3a] group-hover:bg-[#0d0d0d] group-hover:text-[#f4f2ee] transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
-              Platform: Eikaebana Mobile &amp; Web
+            <div className="pt-5 mt-5 border-t border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f] flex items-center justify-between">
+              <span>Channel: 45K+ Views · 100K+ Reach</span>
+              <a
+                href="https://www.instagram.com/smarttoonkids/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0d0d0d] underline decoration-1 underline-offset-2 hover:text-[#77756f]"
+              >
+                Watch ↗
+              </a>
             </div>
           </div>
 
           {/* Card 5: AI-Accelerated Design Suite */}
           <div className="card-surface p-8 sm:p-10 flex flex-col justify-between border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
             <div className="flex items-start justify-between mb-6">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5 flex items-center gap-1.5">
+              <span className="font-mono text-[11px] uppercase text-[#77756f] bg-[#f4f2ee] px-3 py-1 rounded-full border border-[#0d0d0d]/5 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
                 <span>Next-Gen Workflow</span>
               </span>
@@ -181,10 +207,10 @@ export function Achievements() {
             </div>
 
             <div className="my-auto">
-              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-[#0d0d0d] mb-3 font-sans">
+              <div className="text-5xl sm:text-6xl font-bold text-[#0d0d0d] mb-3 font-sans">
                 <Counter target={7} active={hasAnimated} suffix="+" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-[#0d0d0d] mb-2">
+              <h3 className="text-lg font-bold text-[#0d0d0d] mb-2">
                 AI Tools in Daily Craft
               </h3>
               <p className="text-xs sm:text-sm text-[#52504b] leading-relaxed mb-4">
@@ -220,10 +246,10 @@ export function Achievements() {
           {/* Card 6: 100% Engineering Alignment (Spans 3 cols on desktop for strong closing) */}
           <div className="lg:col-span-3 card-surface p-8 sm:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/30 hover:shadow-xl transition-all duration-300 bg-white">
             <div className="max-w-2xl">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#77756f] block mb-2">
+              <span className="font-mono text-[10px] uppercase text-[#77756f] block mb-2">
                 Handoff &amp; Collaboration
               </span>
-              <h3 className="text-2xl font-bold tracking-tight text-[#0d0d0d] mb-2">
+              <h3 className="text-2xl font-bold text-[#0d0d0d] mb-2">
                 100% Developer-Aligned Design Systems
               </h3>
               <p className="text-sm text-[#52504b] leading-relaxed">

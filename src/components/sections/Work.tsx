@@ -22,7 +22,7 @@ export function Work() {
         </h2>
 
         {/* --- DESKTOP HORIZONTAL ACCORDION --- */}
-        <div className="hidden lg:flex gap-3 h-[min(78svh,620px)] w-full items-stretch">
+        <div className="hidden lg:flex gap-3 min-h-[640px] lg:h-[620px] w-full items-stretch">
           {PROJECTS.map((project) => {
             const isOpen = activeId === project.id;
 
@@ -50,7 +50,7 @@ export function Work() {
                     </span>
 
                     {/* Vertical rotated title */}
-                    <div className="rotate-[-90deg] whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#0d0d0d]">
+                    <div className="rotate-[-90deg] whitespace-nowrap text-xs font-bold uppercase text-[#0d0d0d]">
                       {project.title}
                     </div>
 
@@ -62,32 +62,32 @@ export function Work() {
 
                 {/* --- EXPANDED PANEL CONTENT --- */}
                 {isOpen && (
-                  <div className="w-full h-full p-8 sm:p-10 flex flex-col lg:flex-row gap-8 justify-between items-stretch animate-in fade-in duration-500">
+                  <div className="w-full h-full p-7 sm:p-9 flex flex-col lg:flex-row gap-6 justify-between items-stretch animate-in fade-in duration-500 overflow-y-auto">
                     {/* Left Details Column */}
-                    <div className="flex-1 flex flex-col justify-between max-w-lg">
+                    <div className="flex-1 flex flex-col justify-between max-w-xl">
                       <div>
-                        <div className="flex items-center gap-3 mb-3">
+                        <div className="flex items-center gap-3 mb-2.5">
                           <span className="font-mono text-xs text-[#a9a6a0]">
                             {project.index} / {PROJECTS.length.toString().padStart(2, "0")}
                           </span>
-                          <span className="text-xs uppercase font-mono tracking-wider text-[#77756f]">
+                          <span className="text-xs uppercase font-mono text-[#77756f]">
                             {project.kicker}
                           </span>
                         </div>
 
-                        <h3 className="text-3xl font-bold tracking-tight text-[#0d0d0d] mb-4">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-[#0d0d0d] mb-3">
                           {project.title}
                         </h3>
 
-                        <p className="text-sm leading-relaxed text-[#3a3a3a] mb-6">
+                        <p className="text-sm leading-relaxed text-[#3a3a3a] mb-5">
                           {project.description}
                         </p>
 
-                        {/* 2-Column Feature List */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6">
+                        {/* 2-Column Feature List (identical font size with description) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
                           {project.features.map((feat, i) => (
-                            <div key={i} className="flex items-start gap-2 text-xs text-[#52504b]">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1 shrink-0" />
+                            <div key={i} className="flex items-start gap-2.5 text-sm text-[#3a3a3a] leading-snug">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
                               <span>{feat}</span>
                             </div>
                           ))}
@@ -95,31 +95,32 @@ export function Work() {
                       </div>
 
                       {/* Bottom Tech Chips & Action Buttons */}
-                      <div>
+                      <div className="pt-2">
                         {/* Tech Chips */}
-                        <div className="flex flex-wrap items-center gap-2 mb-6">
+                        <div className="flex flex-wrap items-center gap-1.5 mb-4">
                           {project.tech.map((t) => (
                             <div
                               key={t}
                               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#f4f2ee] text-[#0d0d0d] border border-[#0d0d0d]/10"
                             >
-                              <TechLogo name={t} size={14} />
+                              <TechLogo name={t} size={13} />
                               <span>{t}</span>
                             </div>
                           ))}
                         </div>
 
-                        {/* Project Links */}
-                        <div className="flex flex-wrap items-center gap-3">
+                        {/* Project Links & Store Pills */}
+                        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#0d0d0d]/10">
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn-primary text-xs"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#0d0d0d] text-white hover:bg-[#3a3a3a] transition-all shadow-sm"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Live Site ↗
+                              <span>Live Site</span>
+                              <span className="text-[11px]">↗</span>
                             </a>
                           )}
                           {project.caseStudyUrl && (
@@ -127,10 +128,11 @@ export function Work() {
                               href={project.caseStudyUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn-secondary text-xs"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Behance Case Study ↗
+                              <span>Behance Case Study</span>
+                              <span className="text-[11px]">↗</span>
                             </a>
                           )}
                           {project.appStoreUrl && (
@@ -138,10 +140,14 @@ export function Work() {
                               href={project.appStoreUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn-secondary text-xs"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              App Store ↗
+                              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
+                                <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.78-11.66-14.23-6.52-10.22-11.41-21.49-14.67-33.8-3.26-12.32-4.9-23.77-4.9-34.37 0-14.13 3.69-25.75 11.07-34.85 7.38-9.1 16.63-13.79 27.75-14.07 5.01 0 10.36 1.34 16.07 4.02 5.71 2.68 9.38 4.08 11.01 4.2 2.18-.33 6.09-1.8 11.74-4.43 5.66-2.62 10.74-3.83 15.25-3.62 11.96.65 21.6 4.78 28.92 12.39-10.44 6.31-15.55 15.01-15.34 26.11.22 8.7 3.59 15.99 10.12 21.87 6.53 5.88 14.14 9.14 22.84 9.79-1.96 5.88-4.24 11.64-6.85 17.28zm-31.9-108.62c0 6.52-2.45 12.72-7.34 18.6-5.77 6.74-12.83 10.76-21.19 12.06-.22-1.3-.33-2.61-.33-3.92 0-6.74 2.61-13.16 7.83-19.25 2.61-3.05 5.87-5.65 9.79-7.83 3.91-2.18 7.61-3.48 11.1-3.92.11 1.42.14 2.84.14 4.26z"/>
+                              </svg>
+                              <span>App Store</span>
+                              <span className="text-[11px]">↗</span>
                             </a>
                           )}
                           {project.playStoreUrl && (
@@ -149,10 +155,14 @@ export function Work() {
                               href={project.playStoreUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn-secondary text-xs"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Play Store ↗
+                              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                <path d="M3.609 1.814L13.793 12 3.61 22.186a2.128 2.128 0 0 1-.61-1.493V3.307c0-.57.228-1.1.609-1.493zm11.242 11.244l2.493 2.493-12.05 6.945 9.557-9.438zm2.493-2.116l-2.493 2.493-9.557-9.438 12.05 6.945zm1.18.679l2.84 1.636c.92.53.92 1.402 0 1.932l-2.84 1.636-2.698-2.602 2.698-2.602z"/>
+                              </svg>
+                              <span>Play Store</span>
+                              <span className="text-[11px]">↗</span>
                             </a>
                           )}
                         </div>
@@ -160,7 +170,7 @@ export function Work() {
                     </div>
 
                     {/* Right Side: Illustrative Mini-UI in Pure CSS/JSX */}
-                    <div className="flex-1 min-w-[280px] max-w-[420px] rounded-2xl bg-[#f4f2ee] p-5 flex flex-col justify-between border border-[#0d0d0d]/10 relative overflow-hidden">
+                    <div className="hidden xl:flex flex-1 min-w-[260px] max-w-[380px] rounded-2xl bg-[#f4f2ee] p-5 flex-col justify-between border border-[#0d0d0d]/10 relative overflow-hidden">
                       {/* Label tag */}
                       <div className="flex items-center justify-between pb-3 border-b border-[#0d0d0d]/10 font-mono text-[10px] text-[#77756f]">
                         <span className="uppercase">System Architecture</span>
@@ -203,7 +213,7 @@ export function Work() {
                     <span className="font-mono text-xs font-bold text-[#77756f]">
                       {project.index}
                     </span>
-                    <h3 className="text-xl font-bold tracking-tight text-[#0d0d0d]">
+                    <h3 className="text-xl font-bold text-[#0d0d0d]">
                       {project.title}
                     </h3>
                   </div>
@@ -215,40 +225,41 @@ export function Work() {
                     <span className="font-mono text-[10px] uppercase text-[#77756f] block mb-2">
                       {project.kicker}
                     </span>
-                    <p className="text-sm text-[#3a3a3a] mb-4">
+                    <p className="text-sm leading-relaxed text-[#3a3a3a] mb-4">
                       {project.description}
                     </p>
 
-                    <div className="space-y-1.5 mb-5">
+                    <div className="space-y-2 mb-5">
                       {project.features.map((feat, i) => (
-                        <div key={i} className="text-xs text-[#52504b] flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full bg-[#0d0d0d]" />
+                        <div key={i} className="text-sm text-[#3a3a3a] flex items-start gap-2.5 leading-snug">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
                           <span>{feat}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-1.5 mb-5">
                       {project.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 rounded-md text-[10px] font-mono bg-[#f4f2ee] text-[#0d0d0d]"
+                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-[#f4f2ee] text-[#0d0d0d]"
                         >
                           {t}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#0d0d0d]/10">
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn-primary text-xs"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#0d0d0d] text-white hover:bg-[#3a3a3a] transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Live Site ↗
+                          <span>Live Site</span>
+                          <span className="text-[11px]">↗</span>
                         </a>
                       )}
                       {project.caseStudyUrl && (
@@ -256,10 +267,11 @@ export function Work() {
                           href={project.caseStudyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn-secondary text-xs"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Behance ↗
+                          <span>Behance</span>
+                          <span className="text-[11px]">↗</span>
                         </a>
                       )}
                       {project.appStoreUrl && (
@@ -267,10 +279,29 @@ export function Work() {
                           href={project.appStoreUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn-secondary text-xs"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          App Store ↗
+                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
+                            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.78-11.66-14.23-6.52-10.22-11.41-21.49-14.67-33.8-3.26-12.32-4.9-23.77-4.9-34.37 0-14.13 3.69-25.75 11.07-34.85 7.38-9.1 16.63-13.79 27.75-14.07 5.01 0 10.36 1.34 16.07 4.02 5.71 2.68 9.38 4.08 11.01 4.2 2.18-.33 6.09-1.8 11.74-4.43 5.66-2.62 10.74-3.83 15.25-3.62 11.96.65 21.6 4.78 28.92 12.39-10.44 6.31-15.55 15.01-15.34 26.11.22 8.7 3.59 15.99 10.12 21.87 6.53 5.88 14.14 9.14 22.84 9.79-1.96 5.88-4.24 11.64-6.85 17.28zm-31.9-108.62c0 6.52-2.45 12.72-7.34 18.6-5.77 6.74-12.83 10.76-21.19 12.06-.22-1.3-.33-2.61-.33-3.92 0-6.74 2.61-13.16 7.83-19.25 2.61-3.05 5.87-5.65 9.79-7.83 3.91-2.18 7.61-3.48 11.1-3.92.11 1.42.14 2.84.14 4.26z"/>
+                          </svg>
+                          <span>App Store</span>
+                          <span className="text-[11px]">↗</span>
+                        </a>
+                      )}
+                      {project.playStoreUrl && (
+                        <a
+                          href={project.playStoreUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M3.609 1.814L13.793 12 3.61 22.186a2.128 2.128 0 0 1-.61-1.493V3.307c0-.57.228-1.1.609-1.493zm11.242 11.244l2.493 2.493-12.05 6.945 9.557-9.438zm2.493-2.116l-2.493 2.493-9.557-9.438 12.05 6.945zm1.18.679l2.84 1.636c.92.53.92 1.402 0 1.932l-2.84 1.636-2.698-2.602 2.698-2.602z"/>
+                          </svg>
+                          <span>Play Store</span>
+                          <span className="text-[11px]">↗</span>
                         </a>
                       )}
                     </div>

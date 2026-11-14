@@ -117,7 +117,7 @@ export function Experience() {
                       </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0d0d0d] mb-1">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#0d0d0d] mb-1">
                       {item.role}
                     </h3>
                     <div className="text-sm font-medium text-[#77756f] mb-4">
@@ -166,7 +166,7 @@ export function Experience() {
                   <span className="font-mono text-xs uppercase text-[#77756f] block mb-1">
                     Future
                   </span>
-                  <h4 className="text-2xl font-bold tracking-tight text-[#0d0d0d]">
+                  <h4 className="text-2xl font-bold text-[#0d0d0d]">
                     Next — Your team?
                   </h4>
                   <p className="text-xs sm:text-sm text-[#77756f] mt-1">

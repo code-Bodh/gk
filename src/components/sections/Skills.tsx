@@ -68,7 +68,7 @@ export function Skills() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-300 ${
+              className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-[#0d0d0d] text-[#f4f2ee]"
                   : "bg-white text-[#77756f] border border-[#0d0d0d]/10 hover:border-[#0d0d0d]/40 hover:text-[#0d0d0d]"
@@ -117,7 +117,7 @@ export function Skills() {
                   {/* 2-Letter Symbol in Full Uppercase */}
                   <div className="my-auto text-center w-full">
                     <span
-                      className={`text-xl sm:text-2xl font-bold tracking-tight font-mono transition-transform duration-200 ${
+                      className={`text-xl sm:text-2xl font-bold font-mono transition-transform duration-200 ${
                         isSelected ? "text-[#f4f2ee] scale-110 inline-block" : "text-[#0d0d0d]"
                       }`}
                     >
@@ -126,7 +126,7 @@ export function Skills() {
                   </div>
 
                   {/* Skill Name */}
-                  <div className="truncate w-full text-[10px] font-medium tracking-tight text-center">
+                  <div className="truncate w-full text-[10px] font-medium text-center">
                     {skill.name}
                   </div>
                 </button>
@@ -138,7 +138,7 @@ export function Skills() {
           <div className="lg:sticky lg:top-28 card-surface p-7 flex flex-col justify-between border border-[#0d0d0d]/10">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-[#0d0d0d]/10 mb-6">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#77756f]">
+                <span className="font-mono text-[10px] uppercase text-[#77756f]">
                   Element Inspector
                 </span>
                 <span className="font-mono text-[10px] text-[#0d0d0d] font-semibold">
@@ -165,7 +165,7 @@ export function Skills() {
               {/* Details */}
               <div className="space-y-3">
                 <div className="flex items-baseline justify-between">
-                  <h3 className="text-xl font-bold tracking-tight text-[#0d0d0d]">
+                  <h3 className="text-xl font-bold text-[#0d0d0d]">
                     {selectedSkill.name}
                   </h3>
                   <span className="font-mono text-sm font-bold text-[#77756f]">
@@ -189,7 +189,7 @@ export function Skills() {
 
                 {/* Shipped Projects Using This Skill */}
                 <div className="pt-4 mt-4 border-t border-[#0d0d0d]/10">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#77756f] block mb-2">
+                  <span className="font-mono text-[10px] uppercase text-[#77756f] block mb-2">
                     Applied In Projects:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
