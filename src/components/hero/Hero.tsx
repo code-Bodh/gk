@@ -1,20 +1,18 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { PROFILE } from "@/lib/data";
 import { useScroll } from "@/lib/scroll";
 
 export function Hero() {
   const { scrollTo } = useScroll();
-  const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
-  // Play youthful, energetic audio greeting with full introduction & AI tools
+  // Play calm, sweet, and youthful audio greeting
   const playGreeting = () => {
     const audio = audioRef.current;
     if (audio) {
@@ -30,10 +28,10 @@ export function Hero() {
           if (typeof window !== "undefined" && "speechSynthesis" in window) {
             window.speechSynthesis.cancel();
             const utter = new SpeechSynthesisUtterance(
-              "Hi, I am Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also leverage modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to create intuitive user experiences faster and smarter. Welcome to my portfolio!"
+              "Hi, I'm Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
             );
-            utter.rate = 1.05;
-            utter.pitch = 1.25;
+            utter.rate = 0.95;
+            utter.pitch = 1.15;
             utter.onend = () => {
               setIsVoicePlaying(false);
               setIsMuted(true);
@@ -46,50 +44,28 @@ export function Hero() {
     }
   };
 
-  // Video Autoplay (Silent video loop)
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video
-      .play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {});
-  }, []);
-
-  // IntersectionObserver: Pause video when less than 35% visible; resume when visible
+  // IntersectionObserver: Pause audio when scrolling away from hero
   useEffect(() => {
     const heroEl = heroRef.current;
-    const video = videoRef.current;
-    if (!heroEl || !video || typeof IntersectionObserver === "undefined") return;
+    if (!heroEl || typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
-          video.play().catch(() => {});
-          setIsPlaying(true);
-        } else {
-          video.pause();
-          setIsPlaying(false);
+        if (!entry.isIntersecting) {
           const audio = audioRef.current;
           if (audio) audio.pause();
           setIsVoicePlaying(false);
           setIsMuted(true);
         }
       },
-      {
-        threshold: [0, 0.35, 0.7],
-      }
+      { threshold: 0.1 }
     );
 
     observer.observe(heroEl);
     return () => observer.disconnect();
   }, []);
 
-  // Toggle Sound Button: Plays "Hey, I am Gurpreet, senior UI/UX designer."
+  // Toggle Sound Button: Plays calm, sweet voice greeting
   const toggleSound = () => {
     const audio = audioRef.current;
     if (isVoicePlaying) {
@@ -127,30 +103,23 @@ export function Hero() {
 
       {/* Main Centered Visual & Role */}
       <div className="relative z-10 w-full max-w-[1320px] mx-auto px-4 md:px-8 flex-1 flex flex-col items-center justify-center">
-        {/* Looping Hero Video with multiply blend mode */}
-        <div className="relative w-full max-w-[440px] sm:max-w-[520px] md:max-w-[620px] flex items-center justify-center">
+        {/* Transparent Hero Portrait (Zero White Background) */}
+        <div className="relative w-full max-w-[420px] sm:max-w-[480px] md:max-w-[560px] flex items-center justify-center">
           <div
-            className="relative w-full overflow-hidden"
+            className="relative w-full flex items-center justify-center"
             style={{
-              aspectRatio: "768 / 960",
-              maxHeight: "min(84svh, 880px)",
+              aspectRatio: "480 / 600",
+              maxHeight: "min(78svh, 820px)",
             }}
           >
-            <video
-              ref={videoRef}
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster="/portrait-bust.png"
-              className="w-full h-full object-contain mix-blend-multiply"
-              style={{
-                filter: "contrast(1.02) brightness(1.01)",
-              }}
-            >
-              <source src="/hero/hero.webm" type="video/webm" />
-              <source src="/hero/hero.mp4" type="video/mp4" />
-            </video>
+            <Image
+              src="/portrait-bust.png"
+              alt="Gurpreet Kaur — Lead UI/UX Designer"
+              width={480}
+              height={600}
+              priority
+              className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
+            />
 
             {/* Voice Audio Track */}
             <audio
@@ -169,9 +138,6 @@ export function Hero() {
           {/* Floating Sound Control Button */}
           <div className="absolute bottom-6 right-6 z-20">
             <div className="relative group/sound">
-              {autoplayBlocked && (
-                <span className="absolute inset-0 rounded-full bg-[#0d0d0d]/20 animate-ping pointer-events-none" />
-              )}
               <button
                 onClick={toggleSound}
                 aria-label={
@@ -206,8 +172,8 @@ export function Hero() {
               {/* Tooltip */}
               <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-xl bg-[#0d0d0d] text-[#f4f2ee] text-[11px] font-mono whitespace-nowrap opacity-0 group-hover/sound:opacity-100 transition-opacity pointer-events-none shadow-md">
                 {isVoicePlaying
-                  ? "Playing intro (Lead UI/UX & AI Tools)..."
-                  : 'Voice: "Hi, I am Gurpreet! Lead UI/UX..."'}
+                  ? "Playing intro: Gurpreet Kaur..."
+                  : 'Voice: "Hi, I\'m Gurpreet! Lead UI/UX..."'}
               </div>
             </div>
           </div>

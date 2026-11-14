@@ -1,49 +1,14 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { EXPERIENCE } from "@/lib/data";
+import React from "react";
 
 export function Experience() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [spineHeight, setSpineHeight] = useState(0);
-
-  // Measure scroll progress through the experience section to scale the vertical spine line
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let rafId: number;
-    const handleScroll = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const el = sectionRef.current;
-        if (!el) return;
-
-        const rect = el.getBoundingClientRect();
-        const windowH = window.innerHeight;
-
-        // When section enters bottom of viewport to when it leaves top
-        const totalTravel = rect.height + windowH * 0.5;
-        const currentProgress = windowH - rect.top;
-        const ratio = Math.max(0, Math.min(1, currentProgress / totalTravel));
-        setSpineHeight(ratio);
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   return (
     <section
       id="experience"
-      ref={sectionRef}
       className="section-pad relative w-full border-t border-[#0d0d0d]/10"
     >
-      <div className="page-container">
+      <div className="page-container max-w-4xl">
         {/* Section Tag & Heading */}
         <div className="section-tag">
           <span>04</span>
@@ -52,134 +17,179 @@ export function Experience() {
         </div>
 
         <h2 className="section-heading">
-          Experience &amp; <em>education.</em>
+          Experience &amp; <em>growth.</em>
         </h2>
 
-        {/* Vertical Timeline with Scaled Spine */}
-        <div className="relative pl-6 sm:pl-10 md:pl-16 max-w-3xl">
-          {/* Background Pale Track */}
-          <div className="absolute left-[7px] sm:left-[11px] md:left-[15px] top-4 bottom-12 w-[2px] bg-[#0d0d0d]/10" />
+        {/* Consolidated Single 9-Year Career Card */}
+        <div className="card-surface p-6 sm:p-10 border border-[#0d0d0d]/15 bg-white shadow-xl mb-8">
+          {/* Card Header: Overall Experience */}
+          <div className="flex flex-wrap items-start justify-between gap-3 pb-6 border-b border-[#0d0d0d]/10">
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#0d0d0d]">
+                Hashbrown Systems Pvt. Ltd.
+              </h3>
+              <p className="text-xs sm:text-sm text-[#77756f] mt-1.5 font-normal">
+                Chandigarh, India · Apr 2017 – Present ·{" "}
+                <span className="font-semibold text-[#0d0d0d]">9 Years</span>
+              </p>
+            </div>
 
-          {/* Active Ink Spine (scaled by scroll) */}
-          <div
-            className="absolute left-[7px] sm:left-[11px] md:left-[15px] top-4 w-[2px] bg-[#0d0d0d] origin-top transition-transform duration-100 ease-out"
-            style={{
-              height: "calc(100% - 64px)",
-              transform: `scaleY(${spineHeight})`,
-            }}
-          />
+            <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Present</span>
+            </span>
+          </div>
 
-          {/* Timeline Nodes */}
-          <div className="space-y-12">
-            {EXPERIENCE.map((item, idx) => {
-              // Calculate threshold for lighting up node
-              const threshold = (idx + 0.5) / (EXPERIENCE.length + 1);
-              const isLit = spineHeight >= threshold;
+          {/* Connected Progressive Roles Timeline */}
+          <div className="pt-8 space-y-6 sm:space-y-8">
+            {/* 1. Senior UI/UX Designer */}
+            <div className="relative flex items-start gap-4 sm:gap-6 group">
+              <div className="flex flex-col items-center shrink-0">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0d0d0d] text-white flex items-center justify-center font-mono text-xs sm:text-sm font-bold shadow-sm">
+                  1
+                </span>
+                <div className="w-[2px] bg-[#0d0d0d]/15 h-full min-h-[80px] mt-2" />
+              </div>
 
-              return (
-                <div key={idx} className="relative group">
-                  {/* Timeline Dot Node */}
-                  <div
-                    className={`absolute -left-[30px] sm:-left-[36px] md:-left-[42px] top-1.5 w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                      isLit
-                        ? "bg-[#0d0d0d] border-[#0d0d0d] shadow-sm scale-110"
-                        : "bg-white border-[#0d0d0d]/30"
-                    }`}
-                  />
+              <div className="flex-1 pb-3">
+                <h4 className="text-lg sm:text-xl font-bold text-[#0d0d0d]">
+                  Senior UI/UX Designer
+                </h4>
+                <span className="text-xs font-mono text-[#77756f] block mb-2.5">
+                  Apr 2024 – Present
+                </span>
 
-                  {/* Card Content */}
-                  <div
-                    className={`card-surface p-6 sm:p-8 transition-all duration-500 border ${
-                      isLit
-                        ? "border-[#0d0d0d]/15 shadow-md bg-white"
-                        : "border-transparent bg-white/70 opacity-80"
-                    }`}
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-bold text-[#77756f]">
-                          {item.period}
-                        </span>
-                        {item.isPresent && (
-                          <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
-                            Present
-                          </span>
-                        )}
-                      </div>
-                      <span
-                        className={`font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full ${
-                          item.type === "experience"
-                            ? "bg-[#0d0d0d] text-[#f4f2ee]"
-                            : "bg-[#e9e6e0] text-[#0d0d0d]"
-                        }`}
-                      >
-                        {item.type}
-                      </span>
-                    </div>
+                <ul className="space-y-1.5 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-2 shrink-0" />
+                    <span>
+                      UI/UX design for web applications, mobile apps and SaaS products.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-2 shrink-0" />
+                    <span>
+                      Design systems, prototyping, user flows and dashboards.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#0d0d0d] mb-1">
-                      {item.role}
-                    </h3>
-                    <div className="text-sm font-medium text-[#77756f] mb-4">
-                      {item.company} · {item.location}
-                    </div>
+            {/* 2. Senior Graphic Designer */}
+            <div className="relative flex items-start gap-4 sm:gap-6 group">
+              <div className="flex flex-col items-center shrink-0">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0d0d0d] text-white flex items-center justify-center font-mono text-xs sm:text-sm font-bold shadow-sm">
+                  2
+                </span>
+                <div className="w-[2px] bg-[#0d0d0d]/15 h-full min-h-[80px] mt-2" />
+              </div>
 
-                    <ul className="space-y-2 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed mb-4">
-                      {item.bullets.map((b, bIdx) => (
-                        <li key={bIdx} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+              <div className="flex-1 pb-3">
+                <h4 className="text-lg sm:text-xl font-bold text-[#0d0d0d]">
+                  Senior Graphic Designer
+                </h4>
+                <span className="text-xs font-mono text-[#77756f] block mb-2.5">
+                  Apr 2019 – Mar 2024
+                </span>
 
-                    {item.skills && item.skills.length > 0 && (
-                      <div className="pt-3 border-t border-[#0d0d0d]/10 flex flex-wrap items-center gap-1.5 text-xs text-[#52504b]">
-                        <span className="mr-1 text-xs">💎</span>
-                        {item.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="px-2 py-0.5 rounded-md bg-[#f4f2ee] font-mono text-[10px] text-[#3a3a3a] border border-[#0d0d0d]/5"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+                <ul className="space-y-1.5 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-2 shrink-0" />
+                    <span>
+                      Brand identity, visual communication and marketing design.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-2 shrink-0" />
+                    <span>
+                      Digital illustrations and product marketing creatives.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-            {/* End Stop: Dashed "Next — Your team?" Card */}
-            <div className="relative">
-              <div
-                className={`absolute -left-[30px] sm:-left-[36px] md:-left-[42px] top-6 w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                  spineHeight > 0.85
-                    ? "bg-[#0d0d0d] border-[#0d0d0d]"
-                    : "bg-white border-[#0d0d0d]/30"
-                }`}
-              />
+            {/* 3. Junior Graphic Designer / Graphic Designer */}
+            <div className="relative flex items-start gap-4 sm:gap-6 group">
+              <div className="flex flex-col items-center shrink-0">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0d0d0d] text-white flex items-center justify-center font-mono text-xs sm:text-sm font-bold shadow-sm">
+                  3
+                </span>
+              </div>
 
-              <div className="p-8 rounded-[26px] border-2 border-dashed border-[#0d0d0d]/20 bg-transparent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <span className="font-mono text-xs uppercase text-[#77756f] block mb-1">
-                    Future
-                  </span>
-                  <h4 className="text-2xl font-bold text-[#0d0d0d]">
-                    Next — Your team?
-                  </h4>
-                  <p className="text-xs sm:text-sm text-[#77756f] mt-1">
-                    Available for Remote, Hybrid, or Full-Time senior design leadership roles.
-                  </p>
-                </div>
+              <div className="flex-1">
+                <h4 className="text-lg sm:text-xl font-bold text-[#0d0d0d]">
+                  Junior Graphic Designer / Graphic Designer
+                </h4>
+                <span className="text-xs font-mono text-[#77756f] block mb-2.5">
+                  Apr 2017 – Mar 2019
+                </span>
 
-                <a href="#contact" className="btn-primary text-xs shrink-0">
-                  Let&apos;s Connect ↗
-                </a>
+                <ul className="space-y-1.5 text-xs sm:text-sm text-[#3a3a3a] leading-relaxed">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-2 shrink-0" />
+                    <span>
+                      Graphic design, layouts, branding and creative assets.
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Education Companion Card */}
+        <div className="card-surface p-6 sm:p-8 border border-[#0d0d0d]/10 bg-white/90 mb-8">
+          <div className="flex items-center justify-between pb-4 border-b border-[#0d0d0d]/10 mb-5">
+            <h3 className="text-lg sm:text-xl font-bold text-[#0d0d0d]">
+              Education &amp; Academic Background
+            </h3>
+            <span className="font-mono text-[10px] uppercase text-[#77756f] bg-[#f4f2ee] px-2.5 py-1 rounded-full border border-[#0d0d0d]/5">
+              Academics
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#f4f2ee] border border-[#0d0d0d]/5">
+              <span className="font-mono text-xs text-[#77756f] block mb-1">
+                2011 – 2014
+              </span>
+              <h4 className="text-sm sm:text-base font-bold text-[#0d0d0d] mb-1">
+                B.Tech, Computer Science &amp; Engineering
+              </h4>
+              <p className="text-xs text-[#77756f]">Punjab Technical University</p>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#f4f2ee] border border-[#0d0d0d]/5">
+              <span className="font-mono text-xs text-[#77756f] block mb-1">
+                2008 – 2011
+              </span>
+              <h4 className="text-sm sm:text-base font-bold text-[#0d0d0d] mb-1">
+                Diploma, Computer Science
+              </h4>
+              <p className="text-xs text-[#77756f]">State Board of Technical Education</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Closing Future Card */}
+        <div className="p-6 sm:p-8 rounded-[26px] border-2 border-dashed border-[#0d0d0d]/20 bg-transparent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <span className="font-mono text-[10px] uppercase text-[#77756f] block mb-1">
+              Future
+            </span>
+            <h4 className="text-xl sm:text-2xl font-bold text-[#0d0d0d]">
+              Next — Your team?
+            </h4>
+            <p className="text-xs sm:text-sm text-[#77756f] mt-1">
+              Available for Remote, Hybrid, or Full-Time senior design leadership roles.
+            </p>
+          </div>
+
+          <a href="#contact" className="btn-primary text-xs shrink-0">
+            Let&apos;s Connect ↗
+          </a>
         </div>
       </div>
     </section>

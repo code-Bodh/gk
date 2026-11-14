@@ -102,7 +102,7 @@ export function Navigation() {
             <button
               onClick={() => handleNavClick("#hero")}
               aria-label="Back to top"
-              className="relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 hover:rotate-[360deg] hover:scale-105 border border-[#0d0d0d]/15 shadow-sm bg-white shrink-0"
+              className="relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 hover:rotate-[360deg] hover:scale-105 border border-[#0d0d0d]/15 shadow-sm bg-transparent shrink-0"
             >
               <Image
                 src="/gk-logo.png"
