@@ -30,8 +30,8 @@ export function Hero() {
             const utter = new SpeechSynthesisUtterance(
               "Hi, I'm Gurpreet! Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools like ChatGPT, Claude, Gemini, and Antigravity to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
             );
-            utter.rate = 0.95;
-            utter.pitch = 1.15;
+            utter.rate = 0.9;
+            utter.pitch = 1.05;
             utter.onend = () => {
               setIsVoicePlaying(false);
               setIsMuted(true);
@@ -130,8 +130,8 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.m4a?v=2" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=2" type="audio/wav" />
+              <source src="/hero/intro-voice.m4a?v=3" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=3" type="audio/wav" />
             </audio>
           </div>
 
