@@ -121,7 +121,7 @@ export function Hero() {
               className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
             />
 
-            {/* Voice Audio Track */}
+            {/* Voice Audio Track (with cache-bust version query) */}
             <audio
               ref={audioRef}
               preload="auto"
@@ -130,8 +130,8 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.m4a" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav" type="audio/wav" />
+              <source src="/hero/intro-voice.m4a?v=2" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=2" type="audio/wav" />
             </audio>
           </div>
 
