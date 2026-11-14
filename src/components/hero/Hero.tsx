@@ -142,16 +142,16 @@ export function Hero() {
               }`}
             >
               <Image
-                src="/portrait-bust.png"
+                src="/hero/hero-poster.png"
                 alt="Gurpreet Kaur — Lead UI/UX Designer"
-                width={480}
-                height={600}
+                width={768}
+                height={960}
                 priority
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               />
             </div>
 
-            {/* Speaking Character State (Pre-rendered video loop with gestures, lip-sync, head tilts) */}
+            {/* Speaking Character State (Pre-rendered video loop with gestures, lip-sync, head tilts - 100% Transparent Alpha) */}
             <div
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
                 isVoicePlaying ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -163,18 +163,12 @@ export function Hero() {
                 loop
                 playsInline
                 preload="auto"
-                poster="/portrait-bust.png"
-                className="w-full h-full object-contain mix-blend-multiply"
-                style={{
-                  filter: "contrast(1.02) brightness(1.01)",
-                  maskImage:
-                    "radial-gradient(ellipse 90% 86% at 50% 48%, black 65%, transparent 96%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 90% 86% at 50% 48%, black 65%, transparent 96%)",
-                }}
+                poster="/hero/hero-poster.png"
+                className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               >
-                <source src="/hero/hero.webm?v=6" type="video/webm" />
-                <source src="/hero/hero.mp4?v=6" type="video/mp4" />
+                <source src="/hero/hero-transparent.mov?v=7" type='video/quicktime' />
+                <source src="/hero/hero-transparent.mov?v=7" type='video/mp4; codecs="hvc1"' />
+                <source src="/hero/hero-transparent.webm?v=7" type="video/webm" />
               </video>
             </div>
 
@@ -187,9 +181,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=6" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=6" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=6" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=7" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=7" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=7" type="audio/wav" />
             </audio>
           </div>
 
