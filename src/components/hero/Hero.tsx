@@ -57,7 +57,6 @@ export function Hero() {
                 })
                 .catch(() => {});
             }
-            if (curVideo) curVideo.muted = false;
             cleanupListeners();
           };
 
@@ -128,9 +127,9 @@ export function Hero() {
           if (typeof window !== "undefined" && "speechSynthesis" in window) {
             window.speechSynthesis.cancel();
             const utter = new SpeechSynthesisUtterance(
-              "Hi, I'm Gurpreet! Senior UI/UX designer. I design responsive web applications, interactive websites, and AI-powered platforms."
+              "Hi, I'm Gurpreet! Senior UI/UX designer. I design intuitive web applications, mobile apps, and modern AI platforms. Welcome to my portfolio!"
             );
-            utter.rate = 1.0;
+            utter.rate = 0.9;
             utter.pitch = 1.0;
             const voices = window.speechSynthesis.getVoices();
             const indianVoice = voices.find(
@@ -243,7 +242,7 @@ export function Hero() {
               />
             </div>
 
-            {/* Speaking Character State (Pre-rendered video loop with gestures, lip-sync, head tilts - 100% Transparent Alpha) */}
+            {/* Speaking Character State (Pre-rendered video with subtle gestures, blinks, nods, and synced speech - 100% Transparent Alpha) */}
             <div
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
                 isVoicePlaying ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -251,7 +250,7 @@ export function Hero() {
             >
               <video
                 ref={videoRef}
-                muted={isMuted}
+                muted
                 playsInline
                 preload="auto"
                 poster="/hero/hero-poster.png"
@@ -261,13 +260,13 @@ export function Hero() {
                 }}
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               >
-                <source src="/hero/hero-transparent.mov?v=9" type='video/quicktime' />
-                <source src="/hero/hero-transparent.mov?v=9" type='video/mp4; codecs="hvc1"' />
-                <source src="/hero/hero-transparent.webm?v=9" type="video/webm" />
+                <source src="/hero/hero-transparent.mov?v=11" type='video/quicktime' />
+                <source src="/hero/hero-transparent.mov?v=11" type='video/mp4; codecs="hvc1"' />
+                <source src="/hero/hero-transparent.webm?v=11" type="video/webm" />
               </video>
             </div>
 
-            {/* Voice Audio Track (Synchronized 7.46s Lip-Sync with cache-bust version query) */}
+            {/* Voice Audio Track (Synchronized 15.46s Natural Indian English Speech with natural pauses) */}
             <audio
               ref={audioRef}
               preload="auto"
@@ -276,9 +275,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=9" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=9" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=9" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=11" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=11" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=11" type="audio/wav" />
             </audio>
           </div>
 
@@ -290,7 +289,7 @@ export function Hero() {
                 aria-label={
                   isVoicePlaying
                     ? "Pause voice intro"
-                    : "Listen to Gurpreet: Lead UI/UX designer and AI tools overview"
+                    : "Listen to Gurpreet: Senior UI/UX designer intro"
                 }
                 className="w-[46px] h-[46px] rounded-full bg-[#0d0d0d] text-[#ffffff] flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
               >
