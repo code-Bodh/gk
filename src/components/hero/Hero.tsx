@@ -13,14 +13,92 @@ export function Hero() {
   const [isMuted, setIsMuted] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
 
+  // Autoplay intro video and speech automatically on page open
+  useEffect(() => {
+    let unmounted = false;
+
+    const tryAutoplay = async () => {
+      const video = videoRef.current;
+      const audio = audioRef.current;
+      if (!video) return;
+
+      // Start the video character animation right away
+      try {
+        video.currentTime = 0;
+        await video.play();
+        if (!unmounted) setIsVoicePlaying(true);
+      } catch (e) {
+        // Video autoplay was prevented
+      }
+
+      // Try playing audio with sound
+      if (audio) {
+        audio.currentTime = 0;
+        audio.muted = false;
+        try {
+          await audio.play();
+          if (!unmounted) setIsMuted(false);
+        } catch {
+          // Browser audio autoplay policy requires user interaction first.
+          // Unmute and sync audio the instant the user touches, scrolls, or clicks anywhere on the page!
+          const unlockSound = () => {
+            if (unmounted) return;
+            const curAudio = audioRef.current;
+            const curVideo = videoRef.current;
+            if (curAudio) {
+              curAudio.muted = false;
+              if (curVideo && !curVideo.paused) {
+                curAudio.currentTime = curVideo.currentTime;
+              }
+              curAudio
+                .play()
+                .then(() => {
+                  if (!unmounted) setIsMuted(false);
+                })
+                .catch(() => {});
+            }
+            if (curVideo) curVideo.muted = false;
+            cleanupListeners();
+          };
+
+          const cleanupListeners = () => {
+            window.removeEventListener("pointerdown", unlockSound);
+            window.removeEventListener("touchstart", unlockSound);
+            window.removeEventListener("scroll", unlockSound, true);
+            window.removeEventListener("wheel", unlockSound, true);
+            window.removeEventListener("keydown", unlockSound);
+            window.removeEventListener("click", unlockSound);
+          };
+
+          window.addEventListener("pointerdown", unlockSound, { once: true, passive: true });
+          window.addEventListener("touchstart", unlockSound, { once: true, passive: true });
+          window.addEventListener("scroll", unlockSound, { once: true, capture: true, passive: true });
+          window.addEventListener("wheel", unlockSound, { once: true, capture: true, passive: true });
+          window.addEventListener("keydown", unlockSound, { once: true, passive: true });
+          window.addEventListener("click", unlockSound, { once: true, passive: true });
+        }
+      }
+    };
+
+    // Hydration delay
+    const timer = setTimeout(tryAutoplay, 250);
+
+    return () => {
+      unmounted = true;
+      clearTimeout(timer);
+    };
+  }, []);
+
   // Synchronize talking character video animation with audio playback
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     if (isVoicePlaying) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
+      if (video.paused) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
     } else {
       video.pause();
     }
@@ -28,9 +106,17 @@ export function Hero() {
 
   // Play calm, sweet, and youthful audio greeting
   const playGreeting = () => {
+    const video = videoRef.current;
     const audio = audioRef.current;
+
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+
     if (audio) {
       audio.currentTime = 0;
+      audio.muted = false;
       audio
         .play()
         .then(() => {
@@ -42,9 +128,9 @@ export function Hero() {
           if (typeof window !== "undefined" && "speechSynthesis" in window) {
             window.speechSynthesis.cancel();
             const utter = new SpeechSynthesisUtterance(
-              "Hi! I'm Gurpreet, Lead UI/UX and product designer. With over nine years of craft, I design mobile apps, web applications, SaaS dashboards, and scalable design systems. I also love using modern AI tools, like ChatGPT, Claude, Gemini, and Antigravity, to craft intuitive, thoughtful experiences. Welcome to my portfolio!"
+              "Hi, I'm Gurpreet! Senior UI/UX designer. I design responsive web applications, interactive websites, and AI-powered platforms."
             );
-            utter.rate = 0.9;
+            utter.rate = 1.0;
             utter.pitch = 1.0;
             const voices = window.speechSynthesis.getVoices();
             const indianVoice = voices.find(
@@ -64,6 +150,8 @@ export function Hero() {
             setIsMuted(false);
           }
         });
+    } else {
+      setIsVoicePlaying(true);
     }
   };
 
@@ -76,7 +164,9 @@ export function Hero() {
       ([entry]) => {
         if (!entry.isIntersecting) {
           const audio = audioRef.current;
+          const video = videoRef.current;
           if (audio) audio.pause();
+          if (video) video.pause();
           setIsVoicePlaying(false);
           setIsMuted(true);
         }
@@ -88,11 +178,13 @@ export function Hero() {
     return () => observer.disconnect();
   }, []);
 
-  // Toggle Sound Button: Plays calm, sweet voice greeting
+  // Toggle Sound Button: Plays / pauses voice greeting
   const toggleSound = () => {
     const audio = audioRef.current;
+    const video = videoRef.current;
     if (isVoicePlaying) {
       if (audio) audio.pause();
+      if (video) video.pause();
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
@@ -159,20 +251,23 @@ export function Hero() {
             >
               <video
                 ref={videoRef}
-                muted
-                loop
+                muted={isMuted}
                 playsInline
                 preload="auto"
                 poster="/hero/hero-poster.png"
+                onEnded={() => {
+                  setIsVoicePlaying(false);
+                  setIsMuted(true);
+                }}
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               >
-                <source src="/hero/hero-transparent.mov?v=7" type='video/quicktime' />
-                <source src="/hero/hero-transparent.mov?v=7" type='video/mp4; codecs="hvc1"' />
-                <source src="/hero/hero-transparent.webm?v=7" type="video/webm" />
+                <source src="/hero/hero-transparent.mov?v=9" type='video/quicktime' />
+                <source src="/hero/hero-transparent.mov?v=9" type='video/mp4; codecs="hvc1"' />
+                <source src="/hero/hero-transparent.webm?v=9" type="video/webm" />
               </video>
             </div>
 
-            {/* Voice Audio Track (with cache-bust version query) */}
+            {/* Voice Audio Track (Synchronized 7.46s Lip-Sync with cache-bust version query) */}
             <audio
               ref={audioRef}
               preload="auto"
@@ -181,9 +276,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=7" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=7" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=7" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=9" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=9" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=9" type="audio/wav" />
             </audio>
           </div>
 
