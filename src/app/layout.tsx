@@ -77,8 +77,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${interTight.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="antialiased bg-[#f4f2ee] text-[#0d0d0d]">
+      <body className="antialiased bg-[#f4f2ee] text-[#0d0d0d]" suppressHydrationWarning>
         <ScrollProvider>{children}</ScrollProvider>
       </body>
     </html>

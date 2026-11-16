@@ -89,9 +89,9 @@ export function Navigation() {
 
   return (
     <>
-      {/* 2px Ink Scroll Progress Bar along the very top */}
+      {/* Multi-Color Gradient Scroll Progress Bar along the very top */}
       <div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#0d0d0d] z-50 origin-left transition-transform duration-75 pointer-events-none"
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#6366f1] via-[#ec4899] via-[#f59e0b] to-[#10b981] z-50 origin-left transition-transform duration-75 pointer-events-none shadow-[0_1px_8px_rgba(99,102,241,0.5)]"
         style={{ transform: `scaleX(${scrollProgress})` }}
       />
 
@@ -102,7 +102,7 @@ export function Navigation() {
             <button
               onClick={() => handleNavClick("#hero")}
               aria-label="Back to top"
-              className="relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 hover:rotate-[360deg] hover:scale-105 border border-[#0d0d0d]/15 shadow-sm bg-transparent shrink-0"
+              className="relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-all duration-500 hover:rotate-[360deg] hover:scale-105 border-2 border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.25)] bg-white shrink-0"
             >
               <Image
                 src="/gk-logo.png"
@@ -114,7 +114,7 @@ export function Navigation() {
               />
             </button>
             <span
-              className={`text-sm font-semibold transition-all duration-500 hidden sm:inline-block ${
+              className={`text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 transition-all duration-500 hidden sm:inline-block ${
                 scrolled ? "opacity-0 -translate-x-2 pointer-events-none" : "opacity-100 translate-x-0"
               }`}
             >
@@ -127,8 +127,8 @@ export function Navigation() {
             aria-label="Primary navigation"
             className={`hidden md:flex items-center gap-1 p-1.5 rounded-full transition-all duration-500 pointer-events-auto ${
               scrolled
-                ? "bg-[#ffffff]/80 backdrop-blur-md border border-[#0d0d0d]/10 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-                : "bg-transparent border border-transparent"
+                ? "bg-[#ffffff]/90 backdrop-blur-md border border-indigo-200/60 shadow-[0_8px_30px_rgba(99,102,241,0.08)]"
+                : "bg-white/70 backdrop-blur-sm border border-black/5 shadow-xs"
             }`}
           >
             {NAV.map((item) => {
@@ -137,13 +137,13 @@ export function Navigation() {
                 <button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className={`relative px-4 py-2 text-xs font-medium rounded-full transition-colors duration-300 z-10 ${
-                    isActive ? "text-[#f4f2ee]" : "text-[#0d0d0d] hover:text-[#0d0d0d]/70"
+                  className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-all duration-300 z-10 ${
+                    isActive ? "text-white" : "text-slate-700 hover:text-indigo-600"
                   }`}
                 >
-                  {/* Sliding solid ink indicator pill */}
+                  {/* Sliding solid gradient indicator pill */}
                   {isActive && (
-                    <span className="absolute inset-0 bg-[#0d0d0d] rounded-full -z-10 shadow-sm animate-in fade-in duration-300" />
+                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-full -z-10 shadow-md shadow-indigo-500/30 animate-in fade-in duration-300" />
                   )}
                   {item.label}
                 </button>
@@ -155,7 +155,7 @@ export function Navigation() {
           <div className="md:hidden pointer-events-auto">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="px-4 py-2 rounded-full text-xs font-semibold uppercase bg-[#ffffff]/90 backdrop-blur-md border border-[#0d0d0d]/15 shadow-sm text-[#0d0d0d] transition-all hover:bg-[#0d0d0d] hover:text-[#f4f2ee]"
+              className="px-4 py-2 rounded-full text-xs font-bold uppercase bg-white/95 backdrop-blur-md border border-indigo-200/80 shadow-md shadow-indigo-500/10 text-indigo-950 transition-all hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 hover:text-white"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -199,10 +199,10 @@ export function Navigation() {
               style={{ transitionDelay: `${i * 40}ms` }}
               className="flex items-baseline gap-4 text-left group"
             >
-              <span className="font-mono text-xs text-[#a9a6a0] group-hover:text-[#0d0d0d]">
+              <span className="font-mono text-xs font-bold text-indigo-600 group-hover:text-pink-600 transition-colors">
                 {item.num}
               </span>
-              <span className="text-4xl font-bold text-[#0d0d0d] group-hover:translate-x-2 transition-transform duration-300">
+              <span className="text-4xl font-extrabold text-[#0d0d0d] group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:via-purple-600 group-hover:to-pink-600 group-hover:translate-x-2 transition-all duration-300">
                 {item.label}
               </span>
             </button>

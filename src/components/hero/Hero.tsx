@@ -206,9 +206,9 @@ export function Hero() {
         className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden"
       >
         <span
-          className="text-[clamp(90px,18vw,280px)] font-black tracking-tighter uppercase text-transparent whitespace-nowrap opacity-[0.05]"
+          className="text-[clamp(90px,18vw,280px)] font-black tracking-tighter uppercase text-transparent whitespace-nowrap opacity-[0.06]"
           style={{
-            WebkitTextStroke: "2px #0d0d0d",
+            WebkitTextStroke: "2.5px rgba(99, 102, 241, 0.25)",
           }}
         >
           {PROFILE.firstName}
@@ -217,8 +217,17 @@ export function Hero() {
 
       {/* Main Centered Visual & Role */}
       <div className="relative z-10 w-full max-w-[1320px] mx-auto px-4 md:px-8 flex-1 flex flex-col items-center justify-center">
-        {/* Transparent Hero Portrait (Zero White Background) */}
+        {/* Transparent Hero Portrait with Atmospheric Color Glow */}
         <div className="relative w-full max-w-[420px] sm:max-w-[480px] md:max-w-[560px] flex items-center justify-center">
+          {/* Atmospheric Ambient Color Aura */}
+          <div
+            aria-hidden="true"
+            className="absolute -inset-16 -z-10 flex items-center justify-center pointer-events-none"
+          >
+            <div className="w-[320px] sm:w-[480px] h-[320px] sm:h-[480px] rounded-full bg-gradient-to-tr from-[#6366f1]/25 via-[#ec4899]/20 to-[#f59e0b]/20 blur-[100px] animate-pulse" />
+            <div className="absolute w-[260px] h-[260px] rounded-full bg-[#06b6d4]/20 blur-[80px]" />
+          </div>
+
           <div
             className="relative w-full flex items-center justify-center"
             style={{
@@ -253,20 +262,21 @@ export function Hero() {
                 muted
                 playsInline
                 preload="auto"
-                poster="/hero/hero-poster.png"
+                poster="/hero/hero-poster.png?v=12"
                 onEnded={() => {
                   setIsVoicePlaying(false);
                   setIsMuted(true);
                 }}
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               >
-                <source src="/hero/hero-transparent.mov?v=11" type='video/quicktime' />
-                <source src="/hero/hero-transparent.mov?v=11" type='video/mp4; codecs="hvc1"' />
-                <source src="/hero/hero-transparent.webm?v=11" type="video/webm" />
+                <source src="/hero/hero-transparent.mov?v=12" type='video/quicktime' />
+                <source src="/hero/hero-transparent.mov?v=12" type='video/mp4; codecs="hvc1"' />
+                <source src="/hero/hero-transparent.webm?v=12" type="video/webm" />
+                <source src="/hero/hero.mp4?v=12" type="video/mp4" />
               </video>
             </div>
 
-            {/* Voice Audio Track (Synchronized 15.46s Natural Indian English Speech with natural pauses) */}
+            {/* Voice Audio Track (Synchronized 11.85s Natural Indian English Speech with natural pauses) */}
             <audio
               ref={audioRef}
               preload="auto"
@@ -275,9 +285,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=11" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=11" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=11" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=12" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=12" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=12" type="audio/wav" />
             </audio>
           </div>
 
@@ -291,7 +301,7 @@ export function Hero() {
                     ? "Pause voice intro"
                     : "Listen to Gurpreet: Senior UI/UX designer intro"
                 }
-                className="w-[46px] h-[46px] rounded-full bg-[#0d0d0d] text-[#ffffff] flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
+                className="w-[48px] h-[48px] rounded-full bg-gradient-to-tr from-[#4f46e5] via-[#7c3aed] to-[#ec4899] text-[#ffffff] flex items-center justify-center shadow-lg shadow-indigo-500/30 transition-transform duration-300 hover:scale-110 active:scale-95"
               >
                 {isVoicePlaying ? (
                   // Sound waves / Pause icon
@@ -328,19 +338,26 @@ export function Hero() {
         {/* Hero Role Heading & Description */}
         <div className="text-center mt-4 max-w-2xl">
           <div className="section-tag inline-flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#0d0d0d]" />
-            <span>{PROFILE.location}</span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="font-semibold">{PROFILE.location}</span>
+            <span className="opacity-40">•</span>
+            <span className="text-emerald-600 font-semibold">Available for Work</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#0d0d0d] leading-none mb-4">
-            {PROFILE.role}.
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0d0d0d] leading-none mb-4 tracking-tight">
+            <span className="bg-gradient-to-r from-[#0d0d0d] via-[#4338ca] to-[#7c3aed] bg-clip-text text-transparent">
+              {PROFILE.role}.
+            </span>
           </h1>
-          <p className="text-sm sm:text-base text-[#77756f] max-w-lg mx-auto mb-8 font-normal">
+          <p className="text-sm sm:text-base text-[#64748b] max-w-lg mx-auto mb-8 font-normal">
             {PROFILE.headline}. 9+ years designing high-impact web and mobile products across eCommerce, B2B, and SaaS.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3.5">
             <button
               onClick={() => scrollTo("#work")}
               className="btn-primary"
@@ -350,9 +367,10 @@ export function Hero() {
             <a
               href={PROFILE.resumePath}
               download
-              className="btn-secondary"
+              className="btn-secondary flex items-center gap-2"
               aria-label="Download Resume PDF"
             >
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
               Download Resume
             </a>
             <button

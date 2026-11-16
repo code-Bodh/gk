@@ -8,7 +8,7 @@ import os
 import sys
 import subprocess
 import numpy as np
-import soundfile as sf
+from scipy.io import wavfile
 from PIL import Image, ImageDraw
 
 INPUT_VIDEO = "CV/intro.mp4"
@@ -45,7 +45,7 @@ subprocess.check_call([
     audio_raw_wav
 ])
 
-data, sr = sf.read(audio_raw_wav)
+sr, data = wavfile.read(audio_raw_wav)
 fade_duration = 0.5 # 0.5s cross-fade
 L = int(fade_duration * sr)
 
@@ -54,11 +54,11 @@ body = data[L:]
 fade_out = np.linspace(1.0, 0.0, L, endpoint=False)[:, np.newaxis]
 fade_in = np.linspace(0.0, 1.0, L, endpoint=False)[:, np.newaxis]
 
-blended = body[-L:] * fade_out + head * fade_in
+blended = (body[-L:] * fade_out + head * fade_in).astype(data.dtype)
 looped_audio = np.concatenate([body[:-L], blended], axis=0)
 
 audio_loop_wav = os.path.join(TEMP_DIR, "audio_loop.wav")
-sf.write(audio_loop_wav, looped_audio, sr)
+wavfile.write(audio_loop_wav, sr, looped_audio)
 actual_loop_duration = len(looped_audio) / sr
 print(f"[2] Seamless audio created: {actual_loop_duration:.3f}s (cut {fade_duration}s crossfade)")
 
@@ -66,7 +66,7 @@ print(f"[2] Seamless audio created: {actual_loop_duration:.3f}s (cut {fade_durat
 part_a_len = duration - fade_duration
 offset = part_a_len - fade_duration
 
-crop_filter = "crop=800:1000:715:25,scale=768:960,colorlevels=rimax=0.98:gimax=0.98:bimax=0.98"
+crop_filter = "crop=800:1000:617:25,scale=768:960"
 
 vf_xfade = (
     f"[0:v] {crop_filter},split=2[v1][v2]; "

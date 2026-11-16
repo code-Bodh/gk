@@ -44,17 +44,19 @@ export function Work() {
               >
                 {/* --- FOLDED SLIM SPINE (when not open) --- */}
                 {!isOpen && (
-                  <div className="absolute inset-0 flex flex-col justify-between items-center py-8 px-2">
-                    <span className="font-mono text-xs font-bold text-[#77756f]">
+                  <div className="absolute inset-0 flex flex-col justify-between items-center py-8 px-2 bg-gradient-to-b from-white to-slate-50 hover:to-indigo-50/60 transition-colors">
+                    <div className="w-2 h-5 rounded-full bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 shadow-sm" />
+
+                    <span className="font-mono text-xs font-extrabold text-indigo-600">
                       {project.index}
                     </span>
 
                     {/* Vertical rotated title */}
-                    <div className="rotate-[-90deg] whitespace-nowrap text-xs font-bold uppercase text-[#0d0d0d]">
+                    <div className="rotate-[-90deg] whitespace-nowrap text-xs font-bold uppercase tracking-wider text-slate-800">
                       {project.title}
                     </div>
 
-                    <div className="w-8 h-8 rounded-full border border-[#0d0d0d]/20 flex items-center justify-center text-xs transition-transform duration-300 hover:rotate-90">
+                    <div className="w-8 h-8 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 flex items-center justify-center text-xs font-bold transition-transform duration-300 hover:rotate-90 hover:bg-indigo-600 hover:text-white shadow-sm">
                       +
                     </div>
                   </div>
@@ -67,10 +69,10 @@ export function Work() {
                     <div className="flex-1 flex flex-col justify-between max-w-xl">
                       <div>
                         <div className="flex items-center gap-3 mb-2.5">
-                          <span className="font-mono text-xs text-[#a9a6a0]">
+                          <span className="font-mono text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
                             {project.index} / {PROJECTS.length.toString().padStart(2, "0")}
                           </span>
-                          <span className="text-xs uppercase font-mono text-[#77756f]">
+                          <span className="text-xs uppercase font-mono font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-100">
                             {project.kicker}
                           </span>
                         </div>
@@ -83,11 +85,11 @@ export function Work() {
                           {project.description}
                         </p>
 
-                        {/* 2-Column Feature List (identical font size with description) */}
+                        {/* 2-Column Feature List */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
                           {project.features.map((feat, i) => (
                             <div key={i} className="flex items-start gap-2.5 text-sm text-[#3a3a3a] leading-snug">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
+                              <span className="w-2 h-2 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 mt-1.5 shrink-0 shadow-xs" />
                               <span>{feat}</span>
                             </div>
                           ))}
@@ -101,7 +103,7 @@ export function Work() {
                           {project.tech.map((t) => (
                             <div
                               key={t}
-                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#f4f2ee] text-[#0d0d0d] border border-[#0d0d0d]/10"
+                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50/70 text-indigo-900 border border-indigo-200/80 shadow-xs"
                             >
                               <TechLogo name={t} size={13} />
                               <span>{t}</span>
@@ -116,7 +118,7 @@ export function Work() {
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#0d0d0d] text-white hover:bg-[#3a3a3a] transition-all shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md shadow-indigo-500/20 hover:scale-105 active:scale-95"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <span>Live Site</span>
@@ -128,7 +130,7 @@ export function Work() {
                               href={project.caseStudyUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 transition-all shadow-sm hover:scale-105 active:scale-95"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <span>Behance Case Study</span>
@@ -140,7 +142,7 @@ export function Work() {
                               href={project.appStoreUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all shadow-sm hover:scale-105 active:scale-95"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
@@ -155,10 +157,10 @@ export function Work() {
                               href={project.playStoreUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 transition-all shadow-sm hover:scale-105 active:scale-95"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                              <svg className="w-3.5 h-3.5 fill-current text-emerald-600" viewBox="0 0 24 24">
                                 <path d="M3.609 1.814L13.793 12 3.61 22.186a2.128 2.128 0 0 1-.61-1.493V3.307c0-.57.228-1.1.609-1.493zm11.242 11.244l2.493 2.493-12.05 6.945 9.557-9.438zm2.493-2.116l-2.493 2.493-9.557-9.438 12.05 6.945zm1.18.679l2.84 1.636c.92.53.92 1.402 0 1.932l-2.84 1.636-2.698-2.602 2.698-2.602z"/>
                               </svg>
                               <span>Play Store</span>
@@ -206,23 +208,25 @@ export function Work() {
               <div
                 key={project.id}
                 onClick={() => setActiveId(isOpen ? "" : project.id)}
-                className="card-surface p-6 border border-[#0d0d0d]/10"
+                className={`card-surface p-6 border transition-all ${
+                  isOpen ? "border-indigo-300 ring-2 ring-indigo-500/20 shadow-lg" : "border-[#0d0d0d]/10 hover:border-indigo-200"
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-[#77756f]">
+                    <span className="font-mono text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200">
                       {project.index}
                     </span>
                     <h3 className="text-xl font-bold text-[#0d0d0d]">
                       {project.title}
                     </h3>
                   </div>
-                  <span className="text-base font-mono">{isOpen ? "−" : "+"}</span>
+                  <span className="text-base font-bold font-mono text-indigo-600">{isOpen ? "−" : "+"}</span>
                 </div>
 
                 {isOpen && (
-                  <div className="mt-4 pt-4 border-t border-[#0d0d0d]/10 animate-in fade-in duration-300">
-                    <span className="font-mono text-[10px] uppercase text-[#77756f] block mb-2">
+                  <div className="mt-4 pt-4 border-t border-indigo-100 animate-in fade-in duration-300">
+                    <span className="font-mono text-[10px] font-bold uppercase text-indigo-600 block mb-2">
                       {project.kicker}
                     </span>
                     <p className="text-sm leading-relaxed text-[#3a3a3a] mb-4">
@@ -232,20 +236,21 @@ export function Work() {
                     <div className="space-y-2 mb-5">
                       {project.features.map((feat, i) => (
                         <div key={i} className="text-sm text-[#3a3a3a] flex items-start gap-2.5 leading-snug">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#0d0d0d] mt-1.5 shrink-0" />
+                          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 mt-1.5 shrink-0 shadow-xs shadow-indigo-500/40" />
                           <span>{feat}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-5">
+                    <div className="flex flex-wrap items-center gap-1.5 mb-5">
                       {project.tech.map((t) => (
-                        <span
+                        <div
                           key={t}
-                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-[#f4f2ee] text-[#0d0d0d]"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50/70 text-indigo-900 border border-indigo-200/80 shadow-xs"
                         >
-                          {t}
-                        </span>
+                          <TechLogo name={t} size={13} />
+                          <span>{t}</span>
+                        </div>
                       ))}
                     </div>
 
@@ -255,7 +260,7 @@ export function Work() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#0d0d0d] text-white hover:bg-[#3a3a3a] transition-all shadow-sm"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md shadow-indigo-500/20"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <span>Live Site</span>
@@ -267,7 +272,7 @@ export function Work() {
                           href={project.caseStudyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <span>Behance</span>
@@ -279,7 +284,7 @@ export function Work() {
                           href={project.appStoreUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
@@ -294,10 +299,10 @@ export function Work() {
                           href={project.playStoreUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-[#0d0d0d] border border-[#0d0d0d]/15 hover:bg-[#f4f2ee] transition-all shadow-sm"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 transition-all shadow-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <svg className="w-3.5 h-3.5 fill-current text-emerald-600" viewBox="0 0 24 24">
                             <path d="M3.609 1.814L13.793 12 3.61 22.186a2.128 2.128 0 0 1-.61-1.493V3.307c0-.57.228-1.1.609-1.493zm11.242 11.244l2.493 2.493-12.05 6.945 9.557-9.438zm2.493-2.116l-2.493 2.493-9.557-9.438 12.05 6.945zm1.18.679l2.84 1.636c.92.53.92 1.402 0 1.932l-2.84 1.636-2.698-2.602 2.698-2.602z"/>
                           </svg>
                           <span>Play Store</span>

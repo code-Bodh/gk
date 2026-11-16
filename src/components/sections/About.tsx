@@ -106,9 +106,10 @@ export function About() {
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-xs"
+                  className="px-3.5 py-2 rounded-full border border-blue-200 bg-blue-50/50 text-blue-700 text-xs font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center gap-1.5 shadow-sm"
                 >
-                  LinkedIn ↗
+                  <span>LinkedIn</span>
+                  <span>↗</span>
                 </a>
               )}
               {PROFILE.behance && (
@@ -116,9 +117,10 @@ export function About() {
                   href={PROFILE.behance}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-xs"
+                  className="px-3.5 py-2 rounded-full border border-indigo-200 bg-indigo-50/50 text-indigo-700 text-xs font-semibold hover:bg-indigo-600 hover:text-white transition-all duration-300 flex items-center gap-1.5 shadow-sm"
                 >
-                  Behance ↗
+                  <span>Behance</span>
+                  <span>↗</span>
                 </a>
               )}
               {PROFILE.pinterest && (
@@ -126,9 +128,10 @@ export function About() {
                   href={PROFILE.pinterest}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-xs"
+                  className="px-3.5 py-2 rounded-full border border-rose-200 bg-rose-50/50 text-rose-700 text-xs font-semibold hover:bg-rose-600 hover:text-white transition-all duration-300 flex items-center gap-1.5 shadow-sm"
                 >
-                  Pinterest ↗
+                  <span>Pinterest</span>
+                  <span>↗</span>
                 </a>
               )}
             </div>
@@ -139,11 +142,11 @@ export function About() {
             ref={cardContainerRef}
             className="flex flex-col items-center justify-start relative select-none py-2"
           >
-            {/* Lanyard Strap (30x56 px with scrolling name/role) */}
-            <div className="relative w-[30px] h-[56px] bg-[#1a1a1a] rounded-t-sm shadow-inner flex items-center justify-center overflow-hidden border-x border-[#0d0d0d]/40 z-10">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:4px_4px]" />
+            {/* Lanyard Strap with vibrant gradient */}
+            <div className="relative w-[32px] h-[58px] bg-gradient-to-b from-[#4f46e5] via-[#7c3aed] to-[#ec4899] rounded-t-sm shadow-md flex items-center justify-center overflow-hidden border-x border-white/20 z-10">
+              <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:4px_4px]" />
               {/* Scrolling vertical typography */}
-              <div className="text-[7px] font-mono uppercase tracking-widest text-[#a9a6a0] whitespace-nowrap rotate-90 opacity-80">
+              <div className="text-[7.5px] font-mono uppercase tracking-widest text-white whitespace-nowrap rotate-90 font-bold drop-shadow-sm">
                 GURPREET KAUR · UI/UX
               </div>
             </div>
@@ -329,55 +332,75 @@ export function About() {
               </span>
 
               <div className="space-y-4">
-                <div className="pb-3 border-b border-[#0d0d0d]/10">
-                  <span className="font-mono text-[11px] text-[#77756f] block uppercase">
-                    Location
+                <div className="pb-3 border-b border-indigo-100 flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 text-sm font-bold shadow-sm">
+                    📍
                   </span>
-                  <span className="text-sm font-semibold text-[#0d0d0d]">
-                    {PROFILE.location}
-                  </span>
+                  <div>
+                    <span className="font-mono text-[10px] text-slate-500 block uppercase font-bold">
+                      Location
+                    </span>
+                    <span className="text-sm font-bold text-[#0d0d0d]">
+                      {PROFILE.location}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="pb-3 border-b border-[#0d0d0d]/10">
-                  <span className="font-mono text-[11px] text-[#77756f] block uppercase">
-                    Current Role
+                <div className="pb-3 border-b border-indigo-100 flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 text-sm font-bold shadow-sm">
+                    💼
                   </span>
-                  <span className="text-sm font-semibold text-[#0d0d0d]">
-                    Senior UI/UX & Graphic Designer
-                  </span>
-                  <span className="block text-xs text-[#77756f]">
-                    Hashbrown Systems (2017 – Present)
-                  </span>
+                  <div>
+                    <span className="font-mono text-[10px] text-slate-500 block uppercase font-bold">
+                      Current Role
+                    </span>
+                    <span className="text-sm font-bold text-indigo-900 block">
+                      Senior UI/UX & Graphic Designer
+                    </span>
+                    <span className="block text-xs text-indigo-600 font-medium">
+                      Hashbrown Systems (2017 – Present)
+                    </span>
+                  </div>
                 </div>
 
-                <div className="pb-3 border-b border-[#0d0d0d]/10">
-                  <span className="font-mono text-[11px] text-[#77756f] block uppercase">
-                    Education
+                <div className="pb-3 border-b border-indigo-100 flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-sm font-bold shadow-sm">
+                    🎓
                   </span>
-                  <span className="text-sm font-semibold text-[#0d0d0d]">
-                    B.Tech, Computer Science
-                  </span>
-                  <span className="block text-xs text-[#77756f]">
-                    Diploma, Computer Science
-                  </span>
+                  <div>
+                    <span className="font-mono text-[10px] text-slate-500 block uppercase font-bold">
+                      Education
+                    </span>
+                    <span className="text-sm font-bold text-[#0d0d0d] block">
+                      B.Tech, Computer Science
+                    </span>
+                    <span className="block text-xs text-slate-500">
+                      Diploma, Computer Science
+                    </span>
+                  </div>
                 </div>
 
-                <div>
-                  <span className="font-mono text-[11px] text-[#77756f] block uppercase">
-                    Direct Email
+                <div className="flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 text-sm font-bold shadow-sm">
+                    ✉️
                   </span>
-                  <a
-                    href={`mailto:${PROFILE.email}`}
-                    className="text-sm font-semibold text-[#0d0d0d] hover:underline"
-                  >
-                    {PROFILE.email}
-                  </a>
+                  <div>
+                    <span className="font-mono text-[10px] text-slate-500 block uppercase font-bold">
+                      Direct Email
+                    </span>
+                    <a
+                      href={`mailto:${PROFILE.email}`}
+                      className="text-sm font-bold text-rose-600 hover:text-rose-700 hover:underline"
+                    >
+                      {PROFILE.email}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#0d0d0d]/10">
-              <blockquote className="font-serif italic text-base sm:text-lg text-[#3a3a3a] leading-snug">
+            <div className="pt-6 mt-6 border-t border-indigo-100 bg-gradient-to-r from-indigo-50/60 to-purple-50/40 p-4 rounded-2xl border">
+              <blockquote className="font-serif italic text-base sm:text-lg text-indigo-950 leading-snug">
                 &ldquo;{PROFILE.quote}&rdquo;
               </blockquote>
             </div>
