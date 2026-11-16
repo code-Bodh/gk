@@ -12,6 +12,17 @@ export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isVoicePlaying, setIsVoicePlaying] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
+
+  // Detect Safari for video alpha format (Safari needs HEVC with alpha; Firefox, Chrome & Brave need WebM VP9)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const ua = navigator.userAgent;
+    const isSafariBrowser =
+      /Safari/.test(ua) &&
+      !/Chrome|CriOS|Firefox|FxiOS|Edg|OPR|Brave/.test(ua);
+    setIsSafari(isSafariBrowser);
+  }, []);
 
   // Autoplay intro video and speech automatically on page open
   useEffect(() => {
@@ -20,67 +31,54 @@ export function Hero() {
     const tryAutoplay = async () => {
       const video = videoRef.current;
       const audio = audioRef.current;
-      if (!video) return;
+      if (!video || !audio) return;
 
-      // Start the video character animation right away
+      // Try playing audio unmuted
+      audio.currentTime = 0;
+      audio.muted = false;
+
       try {
+        await audio.play();
+        // Browser allowed unmuted audio autoplay! Start video in sync
         video.currentTime = 0;
-        await video.play();
-        if (!unmounted) setIsVoicePlaying(true);
-      } catch (e) {
-        // Video autoplay was prevented
-      }
-
-      // Try playing audio with sound
-      if (audio) {
-        audio.currentTime = 0;
-        audio.muted = false;
-        try {
-          await audio.play();
-          if (!unmounted) setIsMuted(false);
-        } catch {
-          // Browser audio autoplay policy requires user interaction first.
-          // Unmute and sync audio the instant the user touches, scrolls, or clicks anywhere on the page!
-          const unlockSound = () => {
-            if (unmounted) return;
-            const curAudio = audioRef.current;
-            const curVideo = videoRef.current;
-            if (curAudio) {
-              curAudio.muted = false;
-              if (curVideo && !curVideo.paused) {
-                curAudio.currentTime = curVideo.currentTime;
-              }
-              curAudio
-                .play()
-                .then(() => {
-                  if (!unmounted) setIsMuted(false);
-                })
-                .catch(() => {});
-            }
-            cleanupListeners();
-          };
-
-          const cleanupListeners = () => {
-            window.removeEventListener("pointerdown", unlockSound);
-            window.removeEventListener("touchstart", unlockSound);
-            window.removeEventListener("scroll", unlockSound, true);
-            window.removeEventListener("wheel", unlockSound, true);
-            window.removeEventListener("keydown", unlockSound);
-            window.removeEventListener("click", unlockSound);
-          };
-
-          window.addEventListener("pointerdown", unlockSound, { once: true, passive: true });
-          window.addEventListener("touchstart", unlockSound, { once: true, passive: true });
-          window.addEventListener("scroll", unlockSound, { once: true, capture: true, passive: true });
-          window.addEventListener("wheel", unlockSound, { once: true, capture: true, passive: true });
-          window.addEventListener("keydown", unlockSound, { once: true, passive: true });
-          window.addEventListener("click", unlockSound, { once: true, passive: true });
+        await video.play().catch(() => {});
+        if (!unmounted) {
+          setIsVoicePlaying(true);
+          setIsMuted(false);
         }
+      } catch {
+        // Browser audio autoplay policy blocked unmuted sound on first visit.
+        // Keep character in natural idle breathing posture so she does NOT talk silently!
+        audio.pause();
+        audio.currentTime = 0;
+        video.pause();
+        video.currentTime = 0;
+        if (!unmounted) {
+          setIsVoicePlaying(false);
+          setIsMuted(true);
+        }
+
+        // Start greeting on user's very first interaction (click, tap, or sound button)
+        const unlockOnFirstTouch = () => {
+          if (unmounted) return;
+          cleanupListeners();
+          playGreeting();
+        };
+
+        const cleanupListeners = () => {
+          window.removeEventListener("pointerdown", unlockOnFirstTouch);
+          window.removeEventListener("touchstart", unlockOnFirstTouch);
+          window.removeEventListener("click", unlockOnFirstTouch);
+        };
+
+        window.addEventListener("pointerdown", unlockOnFirstTouch, { once: true, passive: true });
+        window.addEventListener("touchstart", unlockOnFirstTouch, { once: true, passive: true });
+        window.addEventListener("click", unlockOnFirstTouch, { once: true, passive: true });
       }
     };
 
     // Hydration delay
-    const timer = setTimeout(tryAutoplay, 250);
+    const timer = setTimeout(tryAutoplay, 300);
 
     return () => {
       unmounted = true;
@@ -262,17 +260,27 @@ export function Hero() {
                 muted
                 playsInline
                 preload="auto"
-                poster="/hero/hero-poster.png?v=12"
+                poster="/hero/hero-poster.png"
                 onEnded={() => {
                   setIsVoicePlaying(false);
                   setIsMuted(true);
                 }}
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(13,13,13,0.08)]"
               >
-                <source src="/hero/hero-transparent.mov?v=12" type='video/quicktime' />
-                <source src="/hero/hero-transparent.mov?v=12" type='video/mp4; codecs="hvc1"' />
-                <source src="/hero/hero-transparent.webm?v=12" type="video/webm" />
-                <source src="/hero/hero.mp4?v=12" type="video/mp4" />
+                {isSafari ? (
+                  <>
+                    <source src="/hero/hero-transparent.mov?v=16" type="video/quicktime" />
+                    <source src="/hero/hero-transparent.mov?v=16" type='video/mp4; codecs="hvc1"' />
+                    <source src="/hero/hero-transparent.webm?v=16" type="video/webm" />
+                  </>
+                ) : (
+                  <>
+                    <source src="/hero/hero-transparent.webm?v=16" type='video/webm; codecs="vp9"' />
+                    <source src="/hero/hero-transparent.webm?v=16" type="video/webm" />
+                    <source src="/hero/hero-transparent.mov?v=16" type="video/quicktime" />
+                    <source src="/hero/hero-transparent.mov?v=16" type='video/mp4; codecs="hvc1"' />
+                  </>
+                )}
               </video>
             </div>
 
@@ -285,9 +293,9 @@ export function Hero() {
                 setIsMuted(true);
               }}
             >
-              <source src="/hero/intro-voice.mp3?v=12" type="audio/mpeg" />
-              <source src="/hero/intro-voice.m4a?v=12" type="audio/mp4" />
-              <source src="/hero/intro-voice.wav?v=12" type="audio/wav" />
+              <source src="/hero/intro-voice.mp3?v=16" type="audio/mpeg" />
+              <source src="/hero/intro-voice.m4a?v=16" type="audio/mp4" />
+              <source src="/hero/intro-voice.wav?v=16" type="audio/wav" />
             </audio>
           </div>
 
@@ -301,8 +309,11 @@ export function Hero() {
                     ? "Pause voice intro"
                     : "Listen to Gurpreet: Senior UI/UX designer intro"
                 }
-                className="w-[48px] h-[48px] rounded-full bg-gradient-to-tr from-[#4f46e5] via-[#7c3aed] to-[#ec4899] text-[#ffffff] flex items-center justify-center shadow-lg shadow-indigo-500/30 transition-transform duration-300 hover:scale-110 active:scale-95"
+                className="relative w-[48px] h-[48px] rounded-full bg-gradient-to-tr from-[#4f46e5] via-[#7c3aed] to-[#ec4899] text-[#ffffff] flex items-center justify-center shadow-lg shadow-indigo-500/30 transition-transform duration-300 hover:scale-110 active:scale-95"
               >
+                {!isVoicePlaying && (
+                  <span className="absolute -inset-1 rounded-full bg-pink-500/30 animate-ping pointer-events-none" />
+                )}
                 {isVoicePlaying ? (
                   // Sound waves / Pause icon
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
